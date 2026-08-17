@@ -13,6 +13,8 @@ VECTOR_PATH = os.path.join(
     "vectorstore"
 )
 
+COLLECTION = "programme_sections"
+
 
 embedding = HuggingFaceEmbeddings(
 
@@ -26,7 +28,9 @@ vectorstore = Chroma(
 
     persist_directory=VECTOR_PATH,
 
-    embedding_function=embedding
+    embedding_function=embedding,
+
+    collection_name=COLLECTION
 
 )
 
