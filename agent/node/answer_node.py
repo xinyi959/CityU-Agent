@@ -33,14 +33,29 @@ model = ChatOpenRouter(
 
 
 def format_documents(documents) -> str:
+    """Render unified tool-output dicts (or legacy Documents) as context."""
     blocks = []
-    for doc in documents:
-        m = doc.metadata
-        label = m.get("section") or m.get("type", "document")
-        blocks.append(
-            f"[{m.get('programme_id')} | {label}]\n{doc.page_content}"
-        )
+    for item in documents:
+        if isinstance(item, dict):
+            blocks.append(_format_dict(item))
+        else:  # legacy langchain Document
+            m = item.metadata
+            label = m.get("section") or m.get("type", "document")
+            blocks.append(f"[{m.get('programme_id')} | {label}]\n{item.page_content}")
     return "\n\n".join(blocks)
+
+
+def _format_dict(item: dict) -> str:
+    t = item.get("type", "?")
+    pid = item.get("programme_id", "?")
+    if t == "summary":
+        return f"[{pid} | summary] {item.get('name')}\n{item.get('context', '')}"
+    if t == "metadata":
+        return (
+            f"[{pid} | metadata: {item.get('field') or 'all fields'}]\n"
+            f"{item.get('value', '')}"
+        )
+    return f"[{pid} | {item.get('section')}]\n{item.get('context', '')}"
 
 
 def answer_node(state):

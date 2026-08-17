@@ -114,6 +114,38 @@ def build_metadata_documents(programmes: list | None = None) -> list[Document]:
     return [build_metadata_document(p) for p in programmes]
 
 
+def build_field_document(programme: dict, field: str) -> Document:
+    """Direct-lookup Document for a single metadata field of a programme.
+
+    Used by the metadata retriever when the query resolves to a specific
+    programme + field (e.g. tuition fee of P53). For tuition fee, both
+    local and non-local rates are included by default.
+    """
+    programme_id = programme["programme_id"]
+    name = programme.get("name") or programme_id
+    metadata = programme.get("metadata", {})
+
+    if field not in FIELD_LABELS:
+        return build_metadata_document(programme)
+
+    label = FIELD_LABELS[field]
+    text = _value_to_text(metadata.get(field))
+    page_content = f"Programme:\n{name}"
+    if text:
+        page_content += f"\n\n{label}:\n{text}"
+
+    return Document(
+        page_content=page_content,
+        metadata={
+            "id": f"{programme_id}_metadata_{field}",
+            "programme_id": programme_id,
+            "programme_name": name,
+            "type": "metadata",
+            "field": field,
+        },
+    )
+
+
 def build_all() -> tuple[list[Document], list[str]]:
     docs = build_metadata_documents()
     return docs, [d.metadata["id"] for d in docs]

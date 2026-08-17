@@ -46,6 +46,9 @@ class AgentState(TypedDict):
     intent: str
     documents: list
     answer: str
+    # populated by metadata_retriever when the query resolves to a programme
+    programme_id: str
+    programme_name: str
 
 
 # ==================================

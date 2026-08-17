@@ -57,6 +57,45 @@ def retrieve_metadata(query: str, k: int = 5):
     return metadata_vectorstore.similarity_search(query, k=k)
 
 
+# ---------------------------------------------------------------------------
+# Unified tool output format
+#
+#   summary  -> {type, programme_id, name, context}
+#   metadata -> {type, programme_id, field, value}
+#   section  -> {type, programme_id, section, context}
+# ---------------------------------------------------------------------------
+
+
+def to_summary(doc) -> dict:
+    m = doc.metadata
+    return {
+        "type": "summary",
+        "programme_id": m.get("programme_id"),
+        "name": m.get("programme_name"),
+        "context": doc.page_content,
+    }
+
+
+def to_section(doc) -> dict:
+    m = doc.metadata
+    return {
+        "type": "section",
+        "programme_id": m.get("programme_id"),
+        "section": m.get("section"),
+        "context": doc.page_content,
+    }
+
+
+def to_metadata(doc) -> dict:
+    m = doc.metadata
+    return {
+        "type": "metadata",
+        "programme_id": m.get("programme_id"),
+        "field": m.get("field"),
+        "value": doc.page_content,
+    }
+
+
 def search_programmes(query: str, k: int = 5) -> str:
     """Backward-compatible formatted section search (used by test/test_rag.py)."""
     docs = retrieve_section(query, k=k)
