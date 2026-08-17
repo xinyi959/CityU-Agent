@@ -20,11 +20,9 @@ def answer(query: str) -> dict:
 
 
 def pretty_print(result: dict, elapsed: float) -> None:
-    print(f"\n[intent] {result['intent']}"
+    print(f"[intent] {result['intent']}"
           f"  |  evidence {len(result['evidence'])}  |  {elapsed:.1f}s")
-    for e in result["evidence"]:
-        print(f"  - {e.programme_id} > {e.section} (score {e.score:.2f})")
-    print(f"\n[answer]\n{result['final_response']}\n")
+    print(f"\n[answer]\n\n{result['final_response']}\n")
 
 
 def repl() -> None:
