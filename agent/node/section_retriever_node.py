@@ -6,6 +6,7 @@ def section_retriever_node(state):
     """Detailed-QA path: programme section documents as Evidence objects."""
     evidence = [
         Evidence(
+            id=f"{doc.metadata['programme_id']}-{doc.metadata['section']}",
             programme_id=doc.metadata["programme_id"],
             section=doc.metadata["section"],
             content=doc.page_content,

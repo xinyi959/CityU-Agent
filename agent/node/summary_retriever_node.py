@@ -6,6 +6,7 @@ def summary_retriever_node(state):
     """Recommendation path: whole-programme summaries as Evidence objects."""
     evidence = [
         Evidence(
+            id=f"{doc.metadata['programme_id']}-summary",
             programme_id=doc.metadata["programme_id"],
             section="Programme Summary",
             content=doc.page_content,

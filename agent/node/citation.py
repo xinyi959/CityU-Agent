@@ -1,56 +1,52 @@
-"""Citation formatter: builds the final response with evidence sources + content.
+"""Citation formatter: builds the final response with id-anchored sources.
 
-Runs AFTER the generator: turns the answer + evidence list into a
-``final_response`` with a numbered "[Sources]" block and a "[Evidence]"
-block quoting each supporting snippet, and stores the structured
-``citations`` list (with content) in state.
+Runs AFTER the generator. Adds a "Sources:" block where every entry is
+anchored by the Evidence id (easy to debug) and shows the programme name,
+section and confidence:
 
     <answer>
 
-    [Sources]
+    Sources:
 
-    1. P53 > Tuition Fee
+    [P53-tuition_fee]
+    MSc Computer Science > Tuition Fee
+    Confidence: 1.0
 
-    [Evidence]
-
-    "Local Students: HK$7,600 per credit
-     Non-local Students: HK$9,100 per credit"
+The structured ``citations`` list (id, programme, section, score, content)
+is stored in state for programmatic use.
 """
 
-EVIDENCE_SNIPPET_CHARS = 300
+from rag.programme_resolver import get_programmes
 
 
-def _display_section(section: str) -> str:
-    """'tuition_fee' -> 'Tuition Fee'; leave plain titles untouched."""
-    if "_" in section:
-        return section.replace("_", " ").title()
-    return section
+def _name_map() -> dict:
+    return {p["programme_id"]: p.get("name") for p in get_programmes()}
 
 
 def citation_formatter(state):
+    name_map = _name_map()
+
     citations = []
     for e in state["evidence"]:
         citations.append(
             {
+                "id": e.id,
+                "programme_id": e.programme_id,
                 "programme": e.programme_id,
+                "programme_name": name_map.get(e.programme_id, e.programme_id),
                 "section": e.section,
                 "score": round(e.score, 2),
                 "content": e.content,
             }
         )
 
-    final_response = f"{state['answer']}\n\n[Sources]\n"
-
-    for i, c in enumerate(citations, 1):
-        final_response += (
-            f"\n{i}. {c['programme']} > "
-            f"{_display_section(c['section'])}"
-        )
-
-    final_response += "\n\n[Evidence]\n"
+    final_response = f"{state['answer']}\n\nSources:\n"
     for c in citations:
-        snippet = c["content"][:EVIDENCE_SNIPPET_CHARS]
-        final_response += f'\n"{snippet}"\n'
+        final_response += (
+            f"\n[{c['id']}]\n"
+            f"{c['programme_name']} > {c['section']}\n"
+            f"Confidence: {c['score']}"
+        )
 
     return {
         "citations": citations,
