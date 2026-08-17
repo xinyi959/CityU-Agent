@@ -35,23 +35,11 @@ model = ChatOpenRouter(
 
 
 def format_evidence(evidence_list) -> str:
-    """Render Evidence objects (or legacy dicts) as LLM context blocks."""
+    """Render Evidence objects as LLM context blocks."""
     blocks = []
     for item in evidence_list:
         if isinstance(item, Evidence):
             blocks.append(item.render())
-        elif isinstance(item, dict):
-            t = item.get("type", "?")
-            pid = item.get("programme_id", "?")
-            if t == "metadata":
-                blocks.append(
-                    f"[{pid} | metadata: {item.get('field')}]\n{item.get('value', '')}"
-                )
-            else:
-                blocks.append(
-                    f"[{pid} | {item.get('section')}]\n"
-                    f"{item.get('context', item.get('value', ''))}"
-                )
         else:
             blocks.append(str(item))
     return "\n\n".join(blocks)

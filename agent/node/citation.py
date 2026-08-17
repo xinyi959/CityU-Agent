@@ -30,12 +30,8 @@ def citation_formatter(state):
     for e in state["evidence"]:
         citations.append(
             {
-                "id": e.id,
-                "programme_id": e.programme_id,
-                "programme": e.programme_id,
+                **e.to_citation(),
                 "programme_name": name_map.get(e.programme_id, e.programme_id),
-                "section": e.section,
-                "score": round(e.score, 2),
                 "content": e.content,
             }
         )

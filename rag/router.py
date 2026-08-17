@@ -36,11 +36,14 @@ SUMMARY_KEYWORDS = [
 
 
 def _has_keyword(q: str, keyword: str) -> bool:
-    """Substring match, with a word-boundary guard for ambiguous keywords."""
-    if keyword == "credit":
-        # \bcredit\w* matches credit/credits/credited but NOT
-        # accreditation/accredited/discredit
-        return bool(re.search(r"\bcredit\w*", q))
+    """Match a keyword against the query.
+
+    Single-word keywords use a word-boundary guard (\bkw\w*) so "fee" matches
+    "fee"/"fees" but not "coffee"/"feedback", and "mode" matches "mode" but
+    not "model"/"modern". Multi-word phrases fall back to a plain substring.
+    """
+    if " " not in keyword:
+        return bool(re.search(rf"\b{re.escape(keyword)}\w*", q))
     return keyword in q
 
 
