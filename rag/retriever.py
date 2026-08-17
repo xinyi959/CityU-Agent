@@ -1,102 +1,54 @@
-from langchain_chroma import Chroma
+"""Retrievers for the two Chroma collections (split from the old single retriever).
 
-from langchain_huggingface import HuggingFaceEmbeddings
+* section_vectorstore (collection: ``programme_sections``)
+    -- factual QA: one document per programme section.
+
+* summary_vectorstore (collection: ``programme_summaries``)
+    -- recommendation: one summary document per programme.
+"""
 
 import os
 
-BASE_DIR = os.path.dirname(
-    os.path.abspath(__file__)
-)
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
-VECTOR_PATH = os.path.join(
-    BASE_DIR,
-    "vectorstore"
-)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+VECTOR_PATH = os.path.join(BASE_DIR, "vectorstore")
 
-COLLECTION = "programme_sections"
+EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
 
+SECTION_COLLECTION = "programme_sections"
+SUMMARY_COLLECTION = "programme_summaries"
 
-embedding = HuggingFaceEmbeddings(
+embedding = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
 
-    model_name="BAAI/bge-large-en-v1.5"
-
-)
-
-
-
-vectorstore = Chroma(
-
+summary_vectorstore = Chroma(
     persist_directory=VECTOR_PATH,
-
     embedding_function=embedding,
+    collection_name=SUMMARY_COLLECTION,
+)
 
-    collection_name=COLLECTION
-
+section_vectorstore = Chroma(
+    persist_directory=VECTOR_PATH,
+    embedding_function=embedding,
+    collection_name=SECTION_COLLECTION,
 )
 
 
-
-retriever = vectorstore.as_retriever(
-
-    search_kwargs={
-        "k":5
-    }
-
-)
+def retrieve_summary(query: str, k: int = 5):
+    """Recommendation retrieval: whole-programme summaries."""
+    return summary_vectorstore.similarity_search(query, k=k)
 
 
+def retrieve_section(query: str, k: int = 5):
+    """Factual retrieval: programme section documents."""
+    return section_vectorstore.similarity_search(query, k=k)
 
 
-def search_programmes(query:str):
-
-    print("\n===== RETRIEVER QUERY =====")
-    print(query)
-
-    # docs = retriever.invoke(
-    #     query
-    # )
-
-    docs = vectorstore.similarity_search_with_score(
-        query,
-        k=5
+def search_programmes(query: str, k: int = 5) -> str:
+    """Backward-compatible formatted section search (used by test/test_rag.py)."""
+    docs = retrieve_section(query, k=k)
+    return "\n".join(
+        f"Programme ID: {d.metadata.get('programme_id')}\nContent: {d.page_content}"
+        for d in docs
     )
-
-    print(
-        f"Retrieved docs: {len(docs)}"
-    )
-
-    results=[]
-
-
-    for doc, score in docs:
-
-
-        print("\n--- CHUNK ---")
-
-        print(
-            "Score:",
-            score
-        )
-
-        print(
-            doc.metadata
-        )
-
-
-        print(
-            doc.page_content[:500]
-        )
-
-
-        results.append(
-            f"""
-Programme ID:
-{doc.metadata.get("programme_id")}
-
-Content:
-{doc.page_content}
-"""
-        )
-
-
-    return "\n".join(results)
