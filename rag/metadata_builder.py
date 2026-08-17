@@ -58,7 +58,7 @@ FIELD_LABELS = {
 }
 
 
-def _value_to_text(value):
+def value_to_text(value):
     """Render a metadata value as lines of natural language."""
     if value is None:
         return None
@@ -92,7 +92,7 @@ def build_metadata_document(programme: dict) -> Document:
 
     blocks = [f"Programme:\n{name}"]
     for key, label in FIELD_LABELS.items():
-        text = _value_to_text(metadata.get(key))
+        text = value_to_text(metadata.get(key))
         if text:
             blocks.append(f"{label}:\n{text}")
 
@@ -129,7 +129,7 @@ def build_field_document(programme: dict, field: str) -> Document:
         return build_metadata_document(programme)
 
     label = FIELD_LABELS[field]
-    text = _value_to_text(metadata.get(field))
+    text = value_to_text(metadata.get(field))
     page_content = f"Programme:\n{name}"
     if text:
         page_content += f"\n\n{label}:\n{text}"

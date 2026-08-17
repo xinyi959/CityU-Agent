@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openrouter import ChatOpenRouter
 
+from rag.evidence import Evidence
+
 load_dotenv()
 
 ANSWER_PROMPT = """You are a CityUHK postgraduate assistant.
@@ -32,34 +34,31 @@ model = ChatOpenRouter(
 )
 
 
-def format_documents(documents) -> str:
-    """Render unified tool-output dicts (or legacy Documents) as context."""
+def format_evidence(evidence_list) -> str:
+    """Render Evidence objects (or legacy dicts) as LLM context blocks."""
     blocks = []
-    for item in documents:
-        if isinstance(item, dict):
-            blocks.append(_format_dict(item))
-        else:  # legacy langchain Document
-            m = item.metadata
-            label = m.get("section") or m.get("type", "document")
-            blocks.append(f"[{m.get('programme_id')} | {label}]\n{item.page_content}")
+    for item in evidence_list:
+        if isinstance(item, Evidence):
+            blocks.append(item.render())
+        elif isinstance(item, dict):
+            t = item.get("type", "?")
+            pid = item.get("programme_id", "?")
+            if t == "metadata":
+                blocks.append(
+                    f"[{pid} | metadata: {item.get('field')}]\n{item.get('value', '')}"
+                )
+            else:
+                blocks.append(
+                    f"[{pid} | {item.get('section')}]\n"
+                    f"{item.get('context', item.get('value', ''))}"
+                )
+        else:
+            blocks.append(str(item))
     return "\n\n".join(blocks)
 
 
-def _format_dict(item: dict) -> str:
-    t = item.get("type", "?")
-    pid = item.get("programme_id", "?")
-    if t == "summary":
-        return f"[{pid} | summary] {item.get('name')}\n{item.get('context', '')}"
-    if t == "metadata":
-        return (
-            f"[{pid} | metadata: {item.get('field') or 'all fields'}]\n"
-            f"{item.get('value', '')}"
-        )
-    return f"[{pid} | {item.get('section')}]\n{item.get('context', '')}"
-
-
-def answer_node(state):
-    context = format_documents(state["documents"])
+def generate_answer(state):
+    context = format_evidence(state["evidence"])
     messages = [
         SystemMessage(content=ANSWER_PROMPT),
         HumanMessage(
@@ -73,3 +72,7 @@ def answer_node(state):
     return {
         "answer": response.content
     }
+
+
+# backward-compatible alias
+answer_node = generate_answer

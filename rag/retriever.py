@@ -1,10 +1,16 @@
-"""Retrievers for the two Chroma collections (split from the old single retriever).
+"""Retrievers for the three Chroma collections.
 
 * section_vectorstore (collection: ``programme_sections``)
-    -- factual QA: one document per programme section.
+    -- detailed QA: one document per programme section.
 
 * summary_vectorstore (collection: ``programme_summaries``)
     -- recommendation: one summary document per programme.
+
+* metadata_vectorstore (collection: ``programme_metadata``)
+    -- exact facts: one metadata document per programme.
+
+Each ``retrieve_*`` returns a list of ``(Document, score)`` pairs so the
+retriever nodes can build Evidence objects with a retrieval score.
 """
 
 import os
@@ -43,63 +49,24 @@ metadata_vectorstore = Chroma(
 
 
 def retrieve_summary(query: str, k: int = 5):
-    """Recommendation retrieval: whole-programme summaries."""
-    return summary_vectorstore.similarity_search(query, k=k)
+    """Recommendation retrieval: whole-programme summaries (doc, score) pairs."""
+    return summary_vectorstore.similarity_search_with_score(query, k=k)
 
 
 def retrieve_section(query: str, k: int = 5):
-    """Factual retrieval: programme section documents."""
-    return section_vectorstore.similarity_search(query, k=k)
+    """Detailed-QA retrieval: programme section documents (doc, score) pairs."""
+    return section_vectorstore.similarity_search_with_score(query, k=k)
 
 
 def retrieve_metadata(query: str, k: int = 5):
-    """Exact-fact retrieval: structured metadata documents (one per programme)."""
-    return metadata_vectorstore.similarity_search(query, k=k)
-
-
-# ---------------------------------------------------------------------------
-# Unified tool output format
-#
-#   summary  -> {type, programme_id, name, context}
-#   metadata -> {type, programme_id, field, value}
-#   section  -> {type, programme_id, section, context}
-# ---------------------------------------------------------------------------
-
-
-def to_summary(doc) -> dict:
-    m = doc.metadata
-    return {
-        "type": "summary",
-        "programme_id": m.get("programme_id"),
-        "name": m.get("programme_name"),
-        "context": doc.page_content,
-    }
-
-
-def to_section(doc) -> dict:
-    m = doc.metadata
-    return {
-        "type": "section",
-        "programme_id": m.get("programme_id"),
-        "section": m.get("section"),
-        "context": doc.page_content,
-    }
-
-
-def to_metadata(doc) -> dict:
-    m = doc.metadata
-    return {
-        "type": "metadata",
-        "programme_id": m.get("programme_id"),
-        "field": m.get("field"),
-        "value": doc.page_content,
-    }
+    """Exact-fact retrieval: metadata documents (doc, score) pairs."""
+    return metadata_vectorstore.similarity_search_with_score(query, k=k)
 
 
 def search_programmes(query: str, k: int = 5) -> str:
     """Backward-compatible formatted section search (used by test/test_rag.py)."""
-    docs = retrieve_section(query, k=k)
+    pairs = retrieve_section(query, k=k)
     return "\n".join(
-        f"Programme ID: {d.metadata.get('programme_id')}\nContent: {d.page_content}"
-        for d in docs
+        f"Programme ID: {doc.metadata.get('programme_id')}\nContent: {doc.page_content}"
+        for doc, _ in pairs
     )

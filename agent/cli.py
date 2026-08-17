@@ -21,12 +21,10 @@ def answer(query: str) -> dict:
 
 def pretty_print(result: dict, elapsed: float) -> None:
     print(f"\n[intent] {result['intent']}"
-          f"  |  retrieved {len(result['documents'])} doc(s)"
-          f"  |  {elapsed:.1f}s")
-    for item in result["documents"]:
-        label = item.get("name") or item.get("section") or item.get("field") or "?"
-        print(f"  - [{item['type']}] {item['programme_id']} | {label}")
-    print(f"\n[answer]\n{result['answer']}\n")
+          f"  |  evidence {len(result['evidence'])}  |  {elapsed:.1f}s")
+    for e in result["evidence"]:
+        print(f"  - {e.programme_id} > {e.section} (score {e.score:.2f})")
+    print(f"\n[answer]\n{result['final_response']}\n")
 
 
 def repl() -> None:

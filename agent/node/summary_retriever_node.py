@@ -1,9 +1,18 @@
-from rag.retriever import retrieve_summary, to_summary
+from rag.evidence import Evidence
+from rag.retriever import retrieve_summary
 
 
 def summary_retriever_node(state):
-    """Recommendation path: retrieve whole-programme summaries (unified format)."""
-    docs = retrieve_summary(state["query"], k=5)
+    """Recommendation path: whole-programme summaries as Evidence objects."""
+    evidence = [
+        Evidence(
+            programme_id=doc.metadata["programme_id"],
+            section="Programme Summary",
+            content=doc.page_content,
+            score=score,
+        )
+        for doc, score in retrieve_summary(state["query"], k=5)
+    ]
     return {
-        "documents": [to_summary(d) for d in docs]
+        "evidence": evidence
     }
