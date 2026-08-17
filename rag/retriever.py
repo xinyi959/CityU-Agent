@@ -19,6 +19,7 @@ EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"
 
 SECTION_COLLECTION = "programme_sections"
 SUMMARY_COLLECTION = "programme_summaries"
+METADATA_COLLECTION = "programme_metadata"
 
 embedding = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
 
@@ -34,6 +35,12 @@ section_vectorstore = Chroma(
     collection_name=SECTION_COLLECTION,
 )
 
+metadata_vectorstore = Chroma(
+    persist_directory=VECTOR_PATH,
+    embedding_function=embedding,
+    collection_name=METADATA_COLLECTION,
+)
+
 
 def retrieve_summary(query: str, k: int = 5):
     """Recommendation retrieval: whole-programme summaries."""
@@ -43,6 +50,11 @@ def retrieve_summary(query: str, k: int = 5):
 def retrieve_section(query: str, k: int = 5):
     """Factual retrieval: programme section documents."""
     return section_vectorstore.similarity_search(query, k=k)
+
+
+def retrieve_metadata(query: str, k: int = 5):
+    """Exact-fact retrieval: structured metadata documents (one per programme)."""
+    return metadata_vectorstore.similarity_search(query, k=k)
 
 
 def search_programmes(query: str, k: int = 5) -> str:

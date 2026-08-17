@@ -1,18 +1,30 @@
-"""Rule-based intent router for the CityUHK programme assistant (v1).
+"""Rule-based intent router for the CityUHK programme assistant (v2).
 
-The domain is narrow (taught postgraduate programmes at CityUHK), so user
-intent is easy to classify with keywords:
+Three knowledge layers, three retrieval paths:
 
-  * recommendation -- "recommend / suggest / which programme / suitable /
-                      best programme / what should I study / help me choose"
-  * qa             -- factual questions about fee / tuition / requirements /
-                      IELTS / TOEFL / deadline / course / credit / duration
+  * metadata -- exact structured facts (fee, tuition, deadline, duration,
+                credit, mode of study ...)        -> programme_metadata index
+  * summary  -- programme recommendation (recommend, suggest, suitable,
+                which programme, choose ...)      -> programme_summaries index
+  * section  -- detailed QA (requirements, courses, content ...)
+                                                  -> programme_sections index
 
-Strategy: recommendation keywords are checked first (they are stronger
-signals), then qa keywords; anything unmatched defaults to ``qa``.
+Priority: metadata keywords are checked FIRST (factual fields are the
+strongest signal), then summary keywords, everything else -> section.
 """
 
-RECOMMENDATION_KEYWORDS = [
+import re
+
+METADATA_KEYWORDS = [
+    "fee",
+    "tuition",
+    "deadline",
+    "duration",
+    "credit",
+    "mode",
+]
+
+SUMMARY_KEYWORDS = [
     "recommend",
     "suggest",
     "suitable",
@@ -22,46 +34,44 @@ RECOMMENDATION_KEYWORDS = [
     "choose",
 ]
 
-QA_KEYWORDS = [
-    "fee",
-    "tuition",
-    "requirement",
-    "ielts",
-    "toefl",
-    "deadline",
-    "course",
-    "credit",
-    "duration",
-]
+
+def _has_keyword(q: str, keyword: str) -> bool:
+    """Substring match, with a word-boundary guard for ambiguous keywords."""
+    if keyword == "credit":
+        # \bcredit\w* matches credit/credits/credited but NOT
+        # accreditation/accredited/discredit
+        return bool(re.search(r"\bcredit\w*", q))
+    return keyword in q
 
 
 def classify_query(query: str) -> str:
-    """Return 'recommendation' or 'qa' for the given user query."""
+    """Return 'metadata', 'summary' or 'section' for the given user query."""
     q = query.lower()
 
-    for keyword in RECOMMENDATION_KEYWORDS:
-        if keyword in q:
-            return "recommendation"
+    for keyword in METADATA_KEYWORDS:
+        if _has_keyword(q, keyword):
+            return "metadata"
 
-    for keyword in QA_KEYWORDS:
-        if keyword in q:
-            return "qa"
+    for keyword in SUMMARY_KEYWORDS:
+        if _has_keyword(q, keyword):
+            return "summary"
 
-    return "qa"
+    return "section"
 
 
 if __name__ == "__main__":
     examples = [
+        "What is the tuition fee of MSc Mechanical Engineering?",
+        "When is the application deadline for P02?",
+        "How many credits are required for this programme?",
+        "What is the normal study duration?",
+        "Is this programme professionally accredited?",
         "I am interested in AI, recommend programmes",
         "Which programme is suitable for an engineering graduate?",
         "What should I study if I like data analysis?",
-        "Help me choose a master's programme in finance",
-        "What is the tuition fee of MA International Accounting?",
-        "IELTS requirement for P66",
-        "When is the application deadline?",
-        "How many credits are required?",
-        "What is the normal study duration?",
+        "What are the entrance requirements of MA International Accounting?",
+        "Which programmes require CET-6 450?",
         "Tell me about CityU",
     ]
     for ex in examples:
-        print(f"{classify_query(ex):<14} <- {ex}")
+        print(f"{classify_query(ex):<10} <- {ex}")

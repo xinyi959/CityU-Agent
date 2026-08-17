@@ -11,7 +11,10 @@ The retrieved context may come from:
 1. Programme summary documents:
    used for programme recommendation.
 
-2. Programme section documents:
+2. Programme metadata documents:
+   used for exact factual fields (fees, deadlines, study periods, modes).
+
+3. Programme section documents:
    used for factual answers.
 
 Use only provided context.

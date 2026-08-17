@@ -5,19 +5,21 @@ Graph:
     START
       |
       v
-    router  (classify_query: recommendation | qa)
+    router  (classify_query: summary | metadata | section)
       |
-      |-- recommendation --> summary_retriever --+
-      |                                          |
-      `-- qa --> section_retriever --------------+
-                                                 v
-                                               answer
-                                                 |
-                                                 v
-                                                END
+      |-- summary  --> summary_retriever --+
+      |-- metadata --> metadata_retriever -+--+
+      |                                    |  |
+      `-- section --> section_retriever ---+  |
+                                                v
+                                              answer
+                                                |
+                                                v
+                                               END
 
-* recommendation -> retrieve whole-programme summaries (programme_summaries)
-* qa              -> retrieve programme section documents (programme_sections)
+* summary  -> whole-programme summaries (programme_summaries)
+* metadata -> structured metadata facts (programme_metadata)
+* section  -> programme section documents (programme_sections)
 """
 
 from typing import TypedDict
@@ -26,6 +28,7 @@ from dotenv import load_dotenv
 from langgraph.graph import END, START, StateGraph
 
 from agent.node.answer_node import answer_node
+from agent.node.metadata_retriever_node import metadata_retriever_node
 from agent.node.router_node import router_node
 from agent.node.section_retriever_node import section_retriever_node
 from agent.node.summary_retriever_node import summary_retriever_node
@@ -55,6 +58,7 @@ def build_graph(answer_node=answer_node):
 
     graph.add_node("router", router_node)
     graph.add_node("summary_retriever", summary_retriever_node)
+    graph.add_node("metadata_retriever", metadata_retriever_node)
     graph.add_node("section_retriever", section_retriever_node)
     graph.add_node("answer", answer_node)
 
@@ -66,13 +70,15 @@ def build_graph(answer_node=answer_node):
         "router",
         lambda state: state["intent"],
         {
-            "recommendation": "summary_retriever",
-            "qa": "section_retriever",
+            "summary": "summary_retriever",
+            "metadata": "metadata_retriever",
+            "section": "section_retriever",
         },
     )
 
-    # both retrievers -> answer -> END
+    # all retrievers -> answer -> END
     graph.add_edge("summary_retriever", "answer")
+    graph.add_edge("metadata_retriever", "answer")
     graph.add_edge("section_retriever", "answer")
     graph.add_edge("answer", END)
 
