@@ -19,10 +19,16 @@ class AgentState(TypedDict, total=False):
     # User query
     query: str
 
-    # Router output
+    # Router output. For compound queries, retrieval_type/field reflect the
+    # FIRST sub-decision (back-compat with the single-decision graph); the
+    # full plan lives in `decisions` and is consumed by the dispatcher.
     intent: str
     retrieval_type: str
     field: str | None
+
+    # Router sub-decisions, one per sub-question (list of RouterSubDecision
+    # dicts). Absent on pre-Phase-1 checkpoints.
+    decisions: list
 
     # Retrieval evidence
     evidence: list
