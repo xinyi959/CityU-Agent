@@ -39,4 +39,9 @@ class AgentState(TypedDict, total=False):
     # Router extracted reference
     programme_ref: ProgrammeRefState
 
+    # Confirmed programme reference. Retrievers write this back after
+    # find_programme succeeds (with programme_id filled); later turns reuse it
+    # so an omitted referent does not force a repeat of name -> id inference.
+    resolved_programme_ref: ProgrammeRefState
+
     

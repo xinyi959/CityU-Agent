@@ -1,33 +1,31 @@
 from rag.evidence import Evidence
 from rag.retriever import retrieve_section
-from rag.programme_resolver import find_programme
+from rag.programme_resolver import resolve_programme_ref
+
 
 def section_retriever_node(state):
 
     query = state["query"]
 
-    programme_id = None
-    programme_ref = state.get(
-        "programme_ref"
+    # Resolve the programme with the same fallback chain as the metadata
+    # retriever: router ref -> previously confirmed ref -> text rules on the
+    # current query -> text rules on recent human messages. Keeps an omitted
+    # referent ("what about English requirement?") from degrading the search
+    # to the whole section corpus.
+    programme = resolve_programme_ref(
+        query,
+        programme_ref=state.get("programme_ref"),
+        resolved_ref=state.get("resolved_programme_ref"),
+        messages=state.get("messages", []),
     )
 
-    print("PROGRAMME REF DEBUG:", programme_ref, type(programme_ref))
-    if programme_ref:
-
-        programme = find_programme(
-            programme_ref
-        )
-
-        if programme:
-            programme_id = programme["programme_id"]
-
+    programme_id = programme["programme_id"] if programme else None
 
     docs = retrieve_section(
         query,
         programme_id=programme_id,
         k=5
     )
-
 
     evidence = [
         Evidence(
@@ -41,8 +39,13 @@ def section_retriever_node(state):
         for doc, score in docs
     ]
 
-
-    return {
+    out = {
         "evidence": evidence,
         "retrieval_type": "section",
     }
+    if programme:
+        out["resolved_programme_ref"] = {
+            "programme_id": programme["programme_id"],
+            "programme_name": programme.get("name"),
+        }
+    return out

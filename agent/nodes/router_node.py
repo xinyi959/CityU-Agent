@@ -10,6 +10,7 @@ Your task has two steps:
 1. Identify user's intent.
 2. Decide which retrieval source should be used.
 
+If the query does not mention a programme, its referent must be inferred from the dialogue history; priority should be given to continuing the programme already confirmed in the previous turn.
 
 ## Intent
 

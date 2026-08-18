@@ -12,7 +12,7 @@ Fallback -> Evidence objects from ``programme_metadata`` vector search.
 
 from rag.evidence import Evidence
 from rag.metadata_builder import FIELD_LABELS, build_metadata_document, value_to_text
-from rag.programme_resolver import extract_field, extract_programme_ref, find_programme
+from rag.programme_resolver import extract_field, resolve_programme_ref
 from rag.retriever import retrieve_metadata
 
 
@@ -39,17 +39,19 @@ def _split_source(value):
 def metadata_retriever_node(state):
     query = state["query"]
 
-    ref = (
-        state.get("programme_ref")
-        or extract_programme_ref(query)
-    )
-    print("PROGRAMME REF DEBUG:", ref, type(ref))
-
     field = (
         state.get("field")
         or extract_field(query)
     )
-    programme = find_programme(ref)
+
+    # Shared fallback chain (router ref -> previously confirmed ref -> text
+    # rules on query -> text rules on recent human messages).
+    programme = resolve_programme_ref(
+        query,
+        programme_ref=state.get("programme_ref"),
+        resolved_ref=state.get("resolved_programme_ref"),
+        messages=state.get("messages", []),
+    )
 
     if programme is not None:
         pid = programme["programme_id"]
@@ -79,9 +81,11 @@ def metadata_retriever_node(state):
         ]
         return {
             "evidence": evidence,
-            "programme_id": pid,
-            "programme_name": programme.get("name"),
             "retrieval_type": "metadata",
+            "resolved_programme_ref": {
+                "programme_id": pid,
+                "programme_name": programme.get("name"),
+            },
         }
 
     # fallback: no resolvable programme -> semantic search on metadata index

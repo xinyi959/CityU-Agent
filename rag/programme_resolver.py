@@ -110,6 +110,87 @@ def resolve_programme(query: str) -> dict | None:
     return find_programme(extract_programme_ref(query))
 
 
+def _message_text(msg) -> str | None:
+    """Extract plain text from a message (LangChain BaseMessage or dict).
+
+    Mirrors ``agent/graph.py::input_adapter``: content may be a str or a list
+    of content blocks; only text blocks are concatenated.
+    """
+    if hasattr(msg, "content"):
+        content = msg.content
+    elif isinstance(msg, dict):
+        content = msg.get("content")
+    else:
+        return None
+
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        return "".join(
+            block.get("text", "") if isinstance(block, dict) else str(block)
+            for block in content
+        )
+    return None
+
+
+def _human_message_texts(messages: list) -> list[str]:
+    """Recent-first plain texts of human (or unknown-format) messages."""
+    texts = []
+    for m in reversed(messages):
+        if hasattr(m, "type"):
+            msg_type = m.type
+        elif isinstance(m, dict):
+            msg_type = m.get("type")
+        else:
+            msg_type = None
+        if msg_type is not None and msg_type != "human":
+            continue
+        text = _message_text(m)
+        if text:
+            texts.append(text)
+    return texts
+
+
+def resolve_programme_ref(
+    query: str,
+    programme_ref: dict | None = None,
+    resolved_ref: dict | None = None,
+    messages: list | None = None,
+) -> dict | None:
+    """Resolve a programme reference to a full Programme dict (or None).
+
+    Candidates are tried in priority order; the first one that
+    ``find_programme`` can resolve wins:
+
+    1. this turn's router ``programme_ref`` (strongest signal)
+    2. previously confirmed ``resolved_ref`` (reuse the id, skip re-inference)
+    3. text rules on the current ``query`` (P-code / programme name)
+    4. text rules over recent human messages (most recent first) --
+       rescues omitted referents such as "what about English requirement?"
+
+    Used by both the metadata and section retrievers so the fallback chain
+    stays symmetric.
+    """
+    candidates = [programme_ref, resolved_ref]
+    if query:
+        candidates.append(extract_programme_ref(query))
+    if messages:
+        candidates.extend(
+            extract_programme_ref(text)
+            for text in _human_message_texts(messages)
+        )
+
+    for ref in candidates:
+        if not ref:
+            continue
+        if not ref.get("programme_id") and not ref.get("programme_name"):
+            continue
+        programme = find_programme(ref)
+        if programme:
+            return programme
+    return None
+
+
 def extract_field(query: str) -> str | None:
     """Return the metadata field key the query asks about (or None)."""
     q = query.lower()
