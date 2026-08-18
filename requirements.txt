@@ -4,7 +4,7 @@ langchain-openrouter
 langchain_community
 langchain-text-splitters
 langchain_huggingface
-
+langgraph-cli[inmem]
 python-dotenv
 sentence-transformers
 chromadb

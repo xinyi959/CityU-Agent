@@ -46,5 +46,5 @@ def citation_formatter(state):
 
     return {
         "citations": citations,
-        "final_response": final_response
+        "final_response": state["answer"]
     }

@@ -10,7 +10,7 @@ from __future__ import annotations
 import sys
 import time
 
-from agent import app
+from agent.graph import app
 
 
 def answer(query: str) -> dict:

@@ -3,3 +3,4 @@ test/
 __pycache__
 vectorstore/
 .env
+.langgraph_api
