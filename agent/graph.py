@@ -143,7 +143,7 @@ def build_graph(answer_node=generate_answer, citation_node=citation_formatter):
     # router -> retriever by intent
     graph.add_conditional_edges(
         "router",
-        lambda state: state["intent"],
+        lambda state: state["retrieval_type"],
         {
             "summary": "summary_retriever",
             "metadata": "metadata_retriever",

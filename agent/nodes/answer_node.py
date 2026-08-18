@@ -1,10 +1,6 @@
-from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_openrouter import ChatOpenRouter
-
+from agent.llm import model
 from rag.evidence import Evidence
-
-load_dotenv()
 
 METADATA_PROMPT = """
 You answer exact programme facts.
@@ -55,12 +51,6 @@ PROMPTS = {
     "section": SECTION_PROMPT,
     "summary": SUMMARY_PROMPT,
 }
-
-model = ChatOpenRouter(
-    model="deepseek/deepseek-v4-flash",
-    temperature=0,
-)
-
 
 def format_evidence(evidence_list) -> str:
     """Render Evidence objects as LLM context blocks."""

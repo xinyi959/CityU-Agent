@@ -16,7 +16,7 @@ for edge in app.get_graph().edges:
     print(edge)
 
 def main():
-    query = "What is the tuition fee of MSc Computer Science?"
+    query = "How much should I pay for MSc Computer Science?"
 
     print("=" * 80)
     print("Testing CityU-Agent graph")

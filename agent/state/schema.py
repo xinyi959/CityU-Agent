@@ -17,6 +17,8 @@ class AgentState(TypedDict, total=False):
 
     # Router output
     intent: str
+    retrieval_type: str
+    field: str | None
 
     # Retrieval evidence
     evidence: list
@@ -34,4 +36,4 @@ class AgentState(TypedDict, total=False):
     programme_id: str
     programme_name: str
 
-    retrieval_type: str
+    
