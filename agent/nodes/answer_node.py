@@ -6,7 +6,8 @@ from rag.evidence import Evidence
 
 load_dotenv()
 
-ANSWER_PROMPT = """You are a CityUHK postgraduate assistant.
+ANSWER_PROMPT = """
+You are a CityUHK postgraduate assistant.
 
 The retrieved context may come from:
 
@@ -26,7 +27,10 @@ If recommending programmes:
 - mention programme names clearly.
 
 If answering factual questions:
-- directly answer from the relevant section."""
+- directly answer from the relevant section.
+- For structured information (fees, requirements, deadlines),
+  use markdown bullet lists.
+"""
 
 model = ChatOpenRouter(
     model="deepseek/deepseek-v4-flash",

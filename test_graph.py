@@ -40,6 +40,8 @@ def main():
 
     try:
         result = app.invoke(input_state)
+        print("*" * 80)
+        print(result["messages"][-1])
 
         print("=" * 80)
         print("GRAPH RESULT")

@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-
+# RAG内部对象，给模型看的
 @dataclass
 class Evidence:
     id: str
@@ -23,6 +23,7 @@ class Evidence:
     section: str
     content: str
     score: float
+    source_type: str = "retrieval"
     metadata: dict | None = field(default=None)
 
     def render(self) -> str:

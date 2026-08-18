@@ -55,6 +55,7 @@ FIELD_LABELS = {
     "tuition_fee": "Tuition Fee",
     "programme_website": "Programme Website",
     "intermediate_award": "Intermediate Award",
+    "deadline":"Application Deadline"
 }
 
 

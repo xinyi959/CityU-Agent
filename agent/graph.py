@@ -26,46 +26,22 @@ Graph:
 * generator generates the answer from Evidence; citation appends Sources.
 """
 
-from typing import TypedDict
-
 from dotenv import load_dotenv
 from langgraph.graph import END, START, StateGraph
-from typing import Annotated, TypedDict
+from typing import Annotated
 from langgraph.graph.message import add_messages
 from langchain_core.messages import AIMessage, BaseMessage
 
-from agent.node.answer_node import generate_answer
-from agent.node.citation import citation_formatter
-from agent.node.metadata_retriever_node import metadata_retriever_node
-from agent.node.router_node import router_node
-from agent.node.section_retriever_node import section_retriever_node
-from agent.node.summary_retriever_node import summary_retriever_node
+from agent.nodes.answer_node import generate_answer
+from agent.nodes.citation import citation_formatter
+from agent.nodes.metadata_retriever_node import metadata_retriever_node
+from agent.nodes.router_node import router_node
+from agent.nodes.section_retriever_node import section_retriever_node
+from agent.nodes.summary_retriever_node import summary_retriever_node
 
+from agent.state import AgentState
 
 load_dotenv()
-
-
-# ==================================
-# State
-# ==================================
-
-
-class AgentState(TypedDict, total=False):
-    # Chat UI / LangGraph standard input
-    messages: Annotated[list[BaseMessage], add_messages]
-
-    # Existing CityU-Agent state
-    query: str
-    intent: str
-    evidence: list
-    answer: str
-    citations: list
-    final_response: str
-
-    # populated by metadata_retriever when the query resolves to a programme
-    programme_id: str
-    programme_name: str
-
 
 def input_adapter(state: AgentState):
     messages = state.get("messages", [])
@@ -129,9 +105,15 @@ def input_adapter(state: AgentState):
     }
 
 def output_adapter(state: AgentState):
+
     return {
         "messages": [
-            AIMessage(content=state["final_response"])
+            AIMessage(
+                content=state["final_response"],
+                additional_kwargs={
+                    "citations": state.get("citations", [])
+                }
+            )
         ]
     }
 

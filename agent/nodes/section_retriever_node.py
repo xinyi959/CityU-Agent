@@ -11,6 +11,7 @@ def section_retriever_node(state):
             section=doc.metadata["section"],
             content=doc.page_content,
             score=score,
+            source_type="retrieval"
         )
         for doc, score in retrieve_section(state["query"], k=5)
     ]

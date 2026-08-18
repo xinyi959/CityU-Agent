@@ -65,6 +65,7 @@ def metadata_retriever_node(state):
                 section=section,
                 content=content,
                 score=1.0,
+                source_type="metadata",
                 metadata={"url": url} if url else None,
             )
         ]
@@ -79,9 +80,14 @@ def metadata_retriever_node(state):
         Evidence(
             id=f"{doc.metadata['programme_id']}-metadata-{i}",
             programme_id=doc.metadata["programme_id"],
-            section=doc.metadata.get("field") or "metadata",
+            section=(
+                FIELD_LABELS.get(field, field)
+                if field
+                else "metadata"
+            ),
             content=doc.page_content,
             score=score,
+            source_type="metadata",
         )
         for i, (doc, score) in enumerate(retrieve_metadata(query))
     ]
