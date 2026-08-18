@@ -33,3 +33,5 @@ class AgentState(TypedDict, total=False):
     # Programme metadata
     programme_id: str
     programme_name: str
+
+    retrieval_type: str

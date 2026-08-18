@@ -73,6 +73,7 @@ def metadata_retriever_node(state):
             "evidence": evidence,
             "programme_id": pid,
             "programme_name": programme.get("name"),
+            "retrieval_type": "metadata",
         }
 
     # fallback: no resolvable programme -> semantic search on metadata index
@@ -92,5 +93,6 @@ def metadata_retriever_node(state):
         for i, (doc, score) in enumerate(retrieve_metadata(query))
     ]
     return {
-        "evidence": evidence
+        "evidence": evidence,
+        "retrieval_type": "metadata",
     }

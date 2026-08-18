@@ -15,5 +15,6 @@ def summary_retriever_node(state):
         for doc, score in retrieve_summary(state["query"], k=5)
     ]
     return {
-        "evidence": evidence
+        "evidence": evidence,
+        "retrieval_type": "summary",
     }

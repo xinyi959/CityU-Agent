@@ -32,6 +32,7 @@ SUMMARY_KEYWORDS = [
     "best programme",
     "what should i study",
     "choose",
+    "apply for"
 ]
 
 

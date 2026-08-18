@@ -6,31 +6,55 @@ from rag.evidence import Evidence
 
 load_dotenv()
 
-ANSWER_PROMPT = """
-You are a CityUHK postgraduate assistant.
+METADATA_PROMPT = """
+You answer exact programme facts.
 
-The retrieved context may come from:
+Rules:
 
-1. Programme summary documents:
-   used for programme recommendation.
+- Give the answer directly.
+- Always use bullet lists for structured fields.
+- Do not explain beyond the provided value.
 
-2. Programme metadata documents:
-   used for exact factual fields (fees, deadlines, study periods, modes).
+Format:
 
-3. Programme section documents:
-   used for factual answers.
+Answer:
 
-Use only provided context.
-
-If recommending programmes:
-- explain why each programme fits the user's background.
-- mention programme names clearly.
-
-If answering factual questions:
-- directly answer from the relevant section.
-- For structured information (fees, requirements, deadlines),
-  use markdown bullet lists.
+- Field: Value
 """
+
+SUMMARY_PROMPT = """
+You recommend CityUHK programmes.
+
+Rules:
+
+- Explain why each programme matches.
+- Compare programmes when multiple options exist.
+- Mention programme names clearly.
+
+Format:
+
+Programme:
+
+Why it fits:
+- ...
+"""
+
+SECTION_PROMPT = """
+You answer detailed programme questions.
+
+Rules:
+
+- Extract relevant information only.
+- Preserve important requirements.
+- Use bullet lists for multiple requirements.
+- Do not summarize away critical conditions.
+"""
+
+PROMPTS = {
+    "metadata": METADATA_PROMPT,
+    "section": SECTION_PROMPT,
+    "summary": SUMMARY_PROMPT,
+}
 
 model = ChatOpenRouter(
     model="deepseek/deepseek-v4-flash",
@@ -50,9 +74,19 @@ def format_evidence(evidence_list) -> str:
 
 
 def generate_answer(state):
+    print(
+        "RETRIEVAL TYPE:",
+        state.get("retrieval_type")
+    )
     context = format_evidence(state["evidence"])
+
+    prompt = PROMPTS.get(
+        state.get("retrieval_type")
+    )
     messages = [
-        SystemMessage(content=ANSWER_PROMPT),
+        SystemMessage(
+            content=prompt
+        ),
         HumanMessage(
             content=(
                 f"User query:\n{state['query']}\n\n"

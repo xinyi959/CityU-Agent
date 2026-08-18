@@ -16,5 +16,6 @@ def section_retriever_node(state):
         for doc, score in retrieve_section(state["query"], k=5)
     ]
     return {
-        "evidence": evidence
+        "evidence": evidence,
+        "retrieval_type": "section",
     }
