@@ -39,8 +39,14 @@ def _split_source(value):
 def metadata_retriever_node(state):
     query = state["query"]
 
-    ref = extract_programme_ref(query)
-    field = extract_field(query)
+    ref = (
+        state.get("programme_ref")
+        or extract_programme_ref(query)
+    )
+    field = (
+        state.get("field")
+        or extract_field(query)
+    )
     programme = find_programme(ref)
 
     if programme is not None:

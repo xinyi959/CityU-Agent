@@ -27,4 +27,4 @@ class RouterDecision(BaseModel):
         None
     ] = None
 
-    programme_id: str | None = None
+    programme_ref: str | None = None

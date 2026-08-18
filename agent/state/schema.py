@@ -32,8 +32,11 @@ class AgentState(TypedDict, total=False):
     # Final UI response
     final_response: str
 
-    # Programme metadata
+    # Resolved programme identity
     programme_id: str
     programme_name: str
+    
+    # Router extracted reference
+    programme_ref: str
 
     

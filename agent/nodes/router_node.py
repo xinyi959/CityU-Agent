@@ -80,5 +80,5 @@ def router_node(state):
         "intent": decision.intent,
         "retrieval_type": decision.retrieval_type,
         "field": decision.field,
-        "programme_id": decision.programme_id,
+        "programme_ref": decision.programme_ref,
     }
