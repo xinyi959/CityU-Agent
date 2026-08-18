@@ -1,29 +1,36 @@
-"""CityUHK postgraduate assistant -- rule-based RAG graph (v1).
+"""CityUHK postgraduate assistant -- rule-based RAG graph (v2).
 
 Graph:
 
     START
       |
       v
-    router  (classify_query: summary | metadata | section)
+    input_adapter
       |
-      |-- summary  --> summary_retriever --+
-      |-- metadata --> metadata_retriever -+--+
-      |                                    |  |
-      `-- section --> section_retriever ---+  |
-                                                v
-                                              generator
-                                                |
-                                                v
-                                              citation
-                                                |
-                                                v
-                                               END
+      v
+    router  (one sub-decision per sub-question of the query)
+      |
+      v
+    dispatcher  (fan out: one retriever call per sub-decision, merge evidence)
+      |
+      v
+    generator
+      |
+      v
+    citation
+      |
+      v
+    output_adapter
+      |
+      v
+     END
 
-* summary  -> whole-programme summaries (programme_summaries)
-* metadata -> structured metadata facts (programme_metadata)
-* section  -> programme section documents (programme_sections)
-* generator generates the answer from Evidence; citation appends Sources.
+* router      -> RouterDecisionList: one decision per sub-question, each
+                 with retrieval_type / field / sub_query (compound queries
+                 produce several decisions)
+* dispatcher  -> calls the metadata / section / summary retriever once per
+                 decision and merges the Evidence (dedup by id)
+* generator   -> answers from the merged Evidence; citation appends Sources.
 """
 
 from dotenv import load_dotenv
@@ -34,10 +41,8 @@ from langchain_core.messages import AIMessage, BaseMessage
 
 from agent.nodes.answer_node import generate_answer
 from agent.nodes.citation import citation_formatter
-from agent.nodes.metadata_retriever_node import metadata_retriever_node
+from agent.nodes.dispatcher_node import dispatcher_node
 from agent.nodes.router_node import router_node
-from agent.nodes.section_retriever_node import section_retriever_node
-from agent.nodes.summary_retriever_node import summary_retriever_node
 
 from agent.state import AgentState
 
@@ -129,38 +134,18 @@ def build_graph(answer_node=generate_answer, citation_node=citation_formatter):
     graph.add_node("output_adapter", output_adapter)
 
     graph.add_node("router", router_node)
-    graph.add_node("summary_retriever", summary_retriever_node)
-    graph.add_node("metadata_retriever", metadata_retriever_node)
-    graph.add_node("section_retriever", section_retriever_node)
+    graph.add_node("dispatcher", dispatcher_node)
 
     graph.add_node("generator", answer_node)
     graph.add_node("citation", citation_node)
 
-    # START -> router
+    # START -> router -> dispatcher -> generator -> citation -> END
     graph.add_edge(START, "input_adapter")
     graph.add_edge("input_adapter", "router")
-
-    # router -> retriever by intent
-    graph.add_conditional_edges(
-        "router",
-        lambda state: state["retrieval_type"],
-        {
-            "summary": "summary_retriever",
-            "metadata": "metadata_retriever",
-            "section": "section_retriever",
-        },
-    )
-
-    # all retrievers -> generator -> citation -> END
-    graph.add_edge("summary_retriever", "generator")
-    graph.add_edge("metadata_retriever", "generator")
-    graph.add_edge("section_retriever", "generator")
-
-    # generator -> citation -> output_adapter
+    graph.add_edge("router", "dispatcher")
+    graph.add_edge("dispatcher", "generator")
     graph.add_edge("generator", "citation")
     graph.add_edge("citation", "output_adapter")
-
-    # output_adapter -> END
     graph.add_edge("output_adapter", END)
 
     return graph.compile()
