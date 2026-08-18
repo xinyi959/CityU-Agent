@@ -2,20 +2,23 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from agent.llm import model
 from rag.evidence import Evidence
 
-METADATA_PROMPT = """
-You answer exact programme facts.
+QA_PROMPT = """
+You answer CityUHK postgraduate programme questions.
 
 Rules:
 
-- Give the answer directly.
-- Always use bullet lists for structured fields.
-- Do not explain beyond the provided value.
-
-Format:
-
-Answer:
-
-- Field: Value
+- Answer EVERY sub-question in the user query, in the order asked.
+- Match each sub-question to the evidence block that covers it
+  (evidence blocks are labeled [programme | section]).
+- For exact facts (tuition fee, deadline, duration, credits, mode of
+  study): state the value directly, use bullet lists, do not explain
+  beyond the provided value.
+- For detailed content (entrance requirements, curriculum, courses):
+  preserve important conditions and requirements, use bullet lists,
+  do not summarize away critical details.
+- If the evidence does not cover a sub-question, say so explicitly
+  instead of guessing.
+- Do not invent facts that are not in the evidence.
 """
 
 SUMMARY_PROMPT = """
@@ -35,22 +38,6 @@ Why it fits:
 - ...
 """
 
-SECTION_PROMPT = """
-You answer detailed programme questions.
-
-Rules:
-
-- Extract relevant information only.
-- Preserve important requirements.
-- Use bullet lists for multiple requirements.
-- Do not summarize away critical conditions.
-"""
-
-PROMPTS = {
-    "metadata": METADATA_PROMPT,
-    "section": SECTION_PROMPT,
-    "summary": SUMMARY_PROMPT,
-}
 
 def format_evidence(evidence_list) -> str:
     """Render Evidence objects as LLM context blocks."""
@@ -66,13 +53,20 @@ def format_evidence(evidence_list) -> str:
 def generate_answer(state):
     print(
         "RETRIEVAL TYPE:",
-        state.get("retrieval_type")
+        state.get("retrieval_type"),
+        "INTENT:",
+        state.get("intent"),
     )
+
+    intent = state.get("intent")
+    prompt = (
+        SUMMARY_PROMPT
+        if intent in ("recommendation", "comparison")
+        else QA_PROMPT
+    )
+
     context = format_evidence(state["evidence"])
 
-    prompt = PROMPTS.get(
-        state.get("retrieval_type")
-    )
     messages = [
         SystemMessage(
             content=prompt
