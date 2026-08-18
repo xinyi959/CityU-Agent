@@ -72,13 +72,22 @@ def router_node(state):
             *messages
         ]
     )
-    print("ROUTER DECISION:")
-    print(decision)
+    print(
+        "PROGRAMME_REF:",
+        decision.programme_ref,
+        type(decision.programme_ref)
+    )
 
+    programme_ref = None
 
+    if decision.programme_ref:
+        programme_ref = {
+            "programme_id": decision.programme_ref.programme_id,
+            "programme_name": decision.programme_ref.programme_name,
+        }
     return {
         "intent": decision.intent,
         "retrieval_type": decision.retrieval_type,
         "field": decision.field,
-        "programme_ref": decision.programme_ref,
+        "programme_ref": programme_ref,
     }

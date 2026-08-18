@@ -43,6 +43,8 @@ def metadata_retriever_node(state):
         state.get("programme_ref")
         or extract_programme_ref(query)
     )
+    print("PROGRAMME REF DEBUG:", ref, type(ref))
+
     field = (
         state.get("field")
         or extract_field(query)

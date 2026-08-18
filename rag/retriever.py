@@ -57,9 +57,22 @@ def retrieve_summary(query: str, k: int = 5):
     )
 
 
-def retrieve_section(query: str, k: int = 5):
+def retrieve_section(query: str, programme_id: str | None = None, k: int = 5):
     """Detailed-QA retrieval: programme section documents (doc, score) pairs."""
-    return get_vectorstore(SECTION_COLLECTION).similarity_search_with_score(
+
+    vectorstore = get_vectorstore(
+        SECTION_COLLECTION
+    )
+    if programme_id:
+        return vectorstore.similarity_search_with_score(
+            query,
+            k=k,
+            filter={
+                "programme_id": programme_id
+            },
+        )
+
+    return vectorstore.similarity_search_with_score(
         query, k=k
     )
 

@@ -4,6 +4,10 @@ from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
 from agent.models import Citation
 
+class ProgrammeRefState(TypedDict, total=False):
+    programme_id: str
+    programme_name: str
+
 class AgentState(TypedDict, total=False):
 
     # Chat UI / LangGraph messages
@@ -31,12 +35,8 @@ class AgentState(TypedDict, total=False):
 
     # Final UI response
     final_response: str
-
-    # Resolved programme identity
-    programme_id: str
-    programme_name: str
     
     # Router extracted reference
-    programme_ref: str
+    programme_ref: ProgrammeRefState
 
     

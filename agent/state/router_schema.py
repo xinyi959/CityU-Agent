@@ -1,6 +1,9 @@
 from typing import Literal
 from pydantic import BaseModel
 
+class ProgrammeRefModel(BaseModel):
+    programme_id: str | None = None
+    programme_name: str | None = None
 
 class RouterDecision(BaseModel):
 
@@ -27,4 +30,4 @@ class RouterDecision(BaseModel):
         None
     ] = None
 
-    programme_ref: str | None = None
+    programme_ref: ProgrammeRefModel | None = None
