@@ -187,3 +187,14 @@ step 8 的 checkpoint 里 `query=Q2` 但 `retrieval_type/field/programme_ref` �
 | confidence 阈值与 citations 组装 | `agent/nodes/citation.py` |
 | LLM 消息序列化（additional_kwargs 白名单，citations 不进入模型上下文） | `.venv/.../langchain_openai/chat_models/base.py::_convert_message_to_dict` |
 | 样本数据 | `data/sample4multiQuery.json` |
+
+---
+
+## 7. v2 变更附注（Phase 1–3 之后）
+
+本文档分析的是 v1 时期捕获的样本（router 输出单决策）。v2 起：
+
+- router 输出 `RouterDecisionList`（每个子问题一条 decision），图改为 `router → dispatcher → generator`（见 `architecture_overview.md` §2.8）。
+- 多轮指代解析的三层机制（全量重路由 + 名字匹配回填 id + programme_id 过滤）**不变**：dispatcher 仍把 `messages` / `resolved_programme_ref` 传入每个子决策的检索子状态，省略指代的第二轮照常落到已确认课程的检索上。
+- 新增约束：router prompt 只切分**最新一轮**的子问题，禁止把历史已答问题重新吐成 decision（Phase 0 探针 D2 用例暴露的过度切分）。
+- `RouterDecision` schema 相关描述已过时：字段定义见 `agent/state/router_schema.py`（`RouterDecisionList` / `RouterSubDecision`）。

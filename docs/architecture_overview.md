@@ -1,8 +1,10 @@
 # CityU-Agent 系统架构概述
 
-> 版本：v1（对应 `agent/graph.py` 中的 "rule-based RAG graph (v1)"）
+> 版本：v2（对应 `agent/graph.py` 中的 "rule-based RAG graph (v2)"，支持复合问题）
 > 范围：从用户提问（User Query）到最终回答（Final Response）的完整链路，
 > 覆盖 LangGraph 工作流、RAG pipeline、数据模型与端到端执行案例。
+> v2 相对 v1 的核心变化：router 输出**子决策列表**（每个子问题一条），
+> 新增 dispatcher 节点扇出到多个检索路径（见 §2.8）。
 
 ---
 
@@ -30,27 +32,33 @@ LLM 只在最后一个节点负责"根据检索到的证据组织语言生成答
  User Query
      │
      ▼
- app.invoke({"query": ...})                agent/cli.py
+ input_adapter                       agent/cli.py（提取最后一条用户消息 → state["query"]）
      │
      ▼
  ┌─────────────────────────────────────────────────────────────┐
- │  router_node                                                 │
- │  classify_query(query)  →  intent ∈ {summary, metadata,     │
- │                             section}                        │
+ │  router_node（LLM 语义路由）                                  │
+ │  输出 RouterDecisionList：intent + programme_ref            │
+ │  + decisions[]（每个子问题一条，含 retrieval_type/field/    │
+ │    sub_query）；field 缺失时用规则修复，失败重试一次，        │
+ │    再失败退回 rag/router.py 规则路由                         │
  └─────────────────────────────────────────────────────────────┘
-     │  intent (写入 shared state)
-     ▼  (conditional edge)
+     │  decisions（写入 shared state）
+     ▼
  ┌─────────────────────────────────────────────────────────────┐
- │  三条检索路径之一：                                          │
+ │  dispatcher_node（扇出）                                    │
+ │  循环 decisions：按 retrieval_type 调对应 retriever 节点，   │
+ │  用子状态（sub_query/field/programme_ref）执行，合并        │
+ │  evidence 并按 id 去重                                      │
  │  • summary  → summary_retriever   (programme_summaries)     │
  │  • metadata → metadata_retriever  (结构化精确查找/元数据索引)│
  │  • section  → section_retriever   (programme_sections)      │
  └─────────────────────────────────────────────────────────────┘
-     │  写入 state["evidence"] = [Evidence, ...]
+     │  写入 state["evidence"] = [Evidence, ...]（可能跨多个检索类型）
      ▼
  ┌─────────────────────────────────────────────────────────────┐
  │  generator (answer_node)                                    │
  │  format_evidence(evidence) → prompt → LLM → state["answer"] │
+ │  （qa 意图用统一 QA_PROMPT，逐子问题对应证据块回答）          │
  └─────────────────────────────────────────────────────────────┘
      │
      ▼
@@ -60,10 +68,11 @@ LLM 只在最后一个节点负责"根据检索到的证据组织语言生成答
  └─────────────────────────────────────────────────────────────┘
      │
      ▼
- Final Response（answer + 带 id 锚点的来源列表）
+ output_adapter → Final Response（answer + 带 id 锚点的来源列表）
 ```
 
-一个查询只会走**一条**检索路径（图是单路径 DAG，不是循环 agent）。每个节点只读/写共享 state，LLM 仅出现在 generator 节点。
+复合查询会走**多条**检索路径（dispatcher 按子问题扇出）；单问题查询走一条。
+图仍是 DAG（无循环），LLM 只出现在 router 与 generator 两个节点。
 
 ---
 
@@ -77,17 +86,25 @@ LLM 只在最后一个节点负责"根据检索到的证据组织语言生成答
 START
   │
   ▼
-router  (classify_query: summary | metadata | section)
+input_adapter
   │
-  ├── summary  ──► summary_retriever  ──┐
-  ├── metadata ─► metadata_retriever ───┼──► generator ──► citation ──► END
-  └── section  ──► section_retriever ───┘
+  ▼
+router  (LLM：RouterDecisionList，每个子问题一条 decision)
+  │
+  ▼
+dispatcher  (循环 decisions，按 retrieval_type 扇出到 retriever 并合并 evidence)
+  │
+  ▼
+generator  →  citation  →  output_adapter  →  END
 ```
 
 关键点：
 
-- **6 个节点**：`router`, `summary_retriever`, `metadata_retriever`, `section_retriever`, `generator`, `citation`。
-- **无循环**：单次查询严格按 `router → 一个 retriever → generator → citation → END` 顺序执行。
+- **6 个节点**：`input_adapter`, `router`, `dispatcher`, `generator`, `citation`, `output_adapter`。
+  三个 retriever（`summary_retriever` / `metadata_retriever` / `section_retriever`）不再是图节点，
+  由 dispatcher 以普通函数形式调用。
+- **无循环**：单次查询严格按 `input_adapter → router → dispatcher → generator → citation → output_adapter` 顺序执行；
+  dispatcher 内部对每个子问题循环调用 retriever，但不是图的循环。
 - **无 ToolNode / 无 agentic loop**：没有 LLM 自主多步推理、没有 `bind_tools`、没有 `ToolMessage` 往返。
 
 ### 2.2 State 对象（State Object）
@@ -97,53 +114,50 @@ router  (classify_query: summary | metadata | section)
 ```python
 class AgentState(TypedDict):
     query: str            # 用户原始提问（入口写入）
-    intent: str           # 路由结果（router 写入）
-    evidence: list        # 检索到的证据列表 [Evidence, ...]（retriever 写入）
+    intent: str           # 路由结果（router 写入，如 "qa"）
+    retrieval_type: str   # decisions[0].retrieval_type（向后兼容旧单决策路径）
+    field: str | None     # decisions[0].field（同上）
+    decisions: list       # router 写入：每个子问题一条 decision（Phase 1+）
+    programme_ref: dict   # router 写入：本轮共享的课程引用（Phase 1+）
+    resolved_programme_ref: dict  # retriever 回填：已确认的课程引用，供多轮复用
+    evidence: list        # 检索到的证据列表 [Evidence, ...]（dispatcher 写入）
     answer: str           # LLM 生成的正文（generator 写入）
     citations: list       # 结构化引用列表（citation 写入）
     final_response: str   # 最终输出（citation 写入）
-    programme_id: str     # 解析出的课程 id（仅 metadata 路径写入，如 "P66"）
-    programme_name: str   # 解析出的课程名（仅 metadata 路径写入）
 ```
 
-注意：`programme_id` / `programme_name` 只有 metadata 精确查找路径会写入，且 `programme_name` 下游（citation 节点）并未消费——citation 自己通过 `get_programmes()` 重建 id→name 映射，因此这两个字段目前主要用于调试和测试断言。
+`programme_ref`（router 的文本提取，id 常为 None）与 `resolved_programme_ref`（retriever 用名字匹配回填 id）
+是两个不同的字段：后者是前者的“确认版”，多轮对话里下一轮省略指代时优先复用（见
+`docs/multi_turn_conversation_analysis.md`）。
 
 ### 2.3 Nodes（节点）
 
 | 节点名 | 文件 | 输入（读 state） | 输出（写 state） | 核心逻辑 |
 |---|---|---|---|---|
-| `router` | `agent/node/router_node.py` | `query` | `intent` | 调 `rag.router.classify_query` |
-| `summary_retriever` | `agent/node/summary_retriever_node.py` | `query` | `evidence` | `retrieve_summary(query, k=5)` → 5 条 `Evidence` |
-| `metadata_retriever` | `agent/node/metadata_retriever_node.py` | `query` | `evidence`, `programme_id`, `programme_name` | 结构化精确查找；失败则向量回退 |
-| `section_retriever` | `agent/node/section_retriever_node.py` | `query` | `evidence` | `retrieve_section(query, k=5)` → 5 条 `Evidence` |
-| `generator` | `agent/node/answer_node.py` | `query`, `evidence` | `answer` | `format_evidence` + `SystemMessage`/`HumanMessage` → LLM |
+| `input_adapter` | `agent/graph.py` | `messages` | `query` | 从消息列表提取最后一条用户文本 |
+| `router` | `agent/node/router_node.py` | `messages` | `intent`, `retrieval_type`, `field`, `programme_ref`, `decisions` | LLM 语义路由（`with_structured_output(RouterDecisionList)`）；字段修复 + 重试 + 规则兜底 |
+| `dispatcher` | `agent/node/dispatcher_node.py` | `decisions`, `query`, `programme_ref` | `evidence`, `resolved_programme_ref` | 循环 decisions，按 retrieval_type 调用 retriever 节点，合并证据并去重 |
+| `generator` | `agent/node/answer_node.py` | `query`, `evidence`, `intent` | `answer` | `format_evidence` + `SystemMessage`/`HumanMessage` → LLM（qa 用统一 QA_PROMPT，recommendation/comparison 用 SUMMARY_PROMPT） |
 | `citation` | `agent/node/citation.py` | `answer`, `evidence` | `citations`, `final_response` | 组装 `Sources:` 块 |
+| `output_adapter` | `agent/graph.py` | `final_response`, `citations` | `messages` | 包装成带 citations 的 `AIMessage` |
 
-### 2.4 Edges 与 Conditional Routing
+三个 retriever（`summary_retriever_node` / `metadata_retriever_node` / `section_retriever_node`）仍以普通函数存在，由 dispatcher 用子状态调用：每个子问题用 `sub_query`（而不是整条复合 query）驱动检索，`programme_ref` 优先取该 decision 自带的（跨课程复合），否则继承顶层。
+
+### 2.4 Edges 与 Routing（v2：dispatcher 取代条件边）
 
 ```python
-graph.add_edge(START, "router")
-
-graph.add_conditional_edges(
-    "router",
-    lambda state: state["intent"],
-    {
-        "summary":  "summary_retriever",
-        "metadata": "metadata_retriever",
-        "section":  "section_retriever",
-    },
-)
-
-graph.add_edge("summary_retriever", "generator")
-graph.add_edge("metadata_retriever", "generator")
-graph.add_edge("section_retriever", "generator")
+graph.add_edge(START, "input_adapter")
+graph.add_edge("input_adapter", "router")
+graph.add_edge("router", "dispatcher")
+graph.add_edge("dispatcher", "generator")
 graph.add_edge("generator", "citation")
-graph.add_edge("citation", END)
+graph.add_edge("citation", "output_adapter")
+graph.add_edge("output_adapter", END)
 ```
 
-- **条件路由**只有一个分支点：`router` 之后，根据 `state["intent"]` 的值从映射表中选一个 retriever。
-- 三个 retriever **汇聚**到同一个 `generator` 节点（`add_edge` 三条汇聚边），下游共享 generator + citation。
-- 路由函数是一个纯 lambda（读 `state["intent"]`），不调用 LLM。
+- v1 的 `add_conditional_edges`（router 后按 `retrieval_type` 三选一）已删除：路由决策下沉到 dispatcher 内部，
+  按**每个子问题**的 `retrieval_type` 选择 retriever。
+- 三个 retriever 汇聚到同一个 `generator` 的事实不变，但合并发生在 dispatcher 节点（`evidence` 按 id 去重）。
 
 ### 2.5 Message Passing / Context 在节点间的传输
 
@@ -169,21 +183,27 @@ state["citations"] + ["final_response"]  # citation 写，最终输出
 
 > `HumanMessage` / `SystemMessage` 只在 `generator` 节点**局部**构造，不进入 state——这是"消息在节点间传输"与本设计最大的区别：节点间传的是结构化字段（尤其 `evidence: list[Evidence]`），而不是聊天消息列表。
 
-### 2.6 Agent 如何决定什么时候调用 RAG
+### 2.6 路由决策（v2：LLM 语义路由 + 规则兜底）
 
-- 决策点是**确定性的规则路由器** `rag/router.py::classify_query`，不是 LLM 自主决策。
-- 三个意图，按优先级顺序匹配（**metadata 优先**，因为事实字段信号最强）：
+- 决策点从 v1 的关键字路由器升级为 **LLM 语义路由**：`router_node` 用
+  `model.with_structured_output(RouterDecisionList)` 让模型直接输出 JSON plan。
+  关键字路由器 `rag/router.py::classify_query` 降级为**兜底**（LLM 两次失败时使用）。
+- 输出示例（复合问题）：
 
-  ```python
-  METADATA_KEYWORDS = ["fee", "tuition", "deadline", "duration", "credit", "mode"]
-  SUMMARY_KEYWORDS  = ["recommend", "suggest", "suitable", "which programme",
-                       "best programme", "what should i study", "choose"]
-  # 命中 metadata 关键字 → "metadata"
-  # 否则命中 summary 关键字 → "summary"
-  # 否则 → "section"
+  ```json
+  {
+    "intent": "qa",
+    "programme_ref": { "programme_name": "MSc Computer Science" },
+    "decisions": [
+      { "retrieval_type": "section",  "field": "entrance_requirement",
+        "sub_query": "What are the English requirements of MSc Computer Science?" },
+      { "retrieval_type": "metadata", "field": "tuition_fee",
+        "sub_query": "What is the tuition fee of MSc Computer Science?" }
+    ]
+  }
   ```
 
-- 命中即路由到对应索引，**始终会调用一次 RAG**（本设计没有"无需检索直接回答"的分支，也没有检索质量反馈/重试循环）。
+- **始终会调用一次 RAG**（每个子问题至少一次），没有“无需检索直接回答”的分支；也没有检索质量反馈/重试循环。
 
 ### 2.7 工具调用是如何处理的（Tool Invocation Flow）
 
@@ -195,13 +215,55 @@ state["citations"] + ["final_response"]  # citation 写，最终输出
 
   | 函数 | 调用位置 | 作用 |
   |---|---|---|
-  | `classify_query` | router 节点 | 决定检索意图 |
+  | `router_llm.invoke` | router 节点 | LLM 语义路由（输出 RouterDecisionList） |
+  | `classify_query` | router 节点（兜底路径） | 规则路由决定检索意图 |
   | `extract_programme_ref` / `extract_field` / `find_programme` | metadata 节点 | 从自然语言里抽课程 id/名称与字段名 |
   | `value_to_text` / `_render_fee` | metadata 节点 | 结构化值 → 文本 |
-  | `retrieve_summary` / `retrieve_section` / `retrieve_metadata` | 各 retriever 节点 | Chroma 向量检索 |
-  | `model.invoke(messages)` | generator 节点 | 唯一一次 LLM 调用 |
+  | `retrieve_summary` / `retrieve_section` / `retrieve_metadata` | 各 retriever 节点（dispatcher 调用） | Chroma 向量检索 |
+  | `model.invoke(messages)` | generator 节点 | 最终答案生成 |
 
-  即：**"什么时候用哪个工具"由规则路由器预先决定，"工具结果"以 `Evidence` 对象塞进 state，最后交给 LLM 一次性生成**。
+  即：**"什么时候用哪个工具"由 router 预先决定（每个子问题一条 decision），"工具结果"以 `Evidence` 对象塞进 state，最后交给 LLM 一次性生成**。
+
+---
+
+## 2.8 复合问题（Compound Query）支持（v2 新增）
+
+### 为什么需要 dispatcher 而不是只改 router 的类型
+
+复合问题（如 "What are the English requirements and tuition fee of MSc Computer Science?"）的
+两个子问题**跨两条检索路径**（entrance requirement → section 向量检索；tuition fee → metadata 精确查找）。
+因此仅把 router 输出改成 list 还不够，图必须能扇出到多个 retriever 并合并证据——这就是 dispatcher 的职责。
+
+### 关键设计点
+
+1. **子问题带独立 `sub_query`**：section 检索是对 `sub_query` 做向量搜索。如果喂整条复合 query，
+   "tuition fee" 的 token 会污染 "English requirements" 的检索。所以每个 decision 携带自己的问句。
+2. **合并发生在 evidence 层**：dispatcher 把各 retriever 的 Evidence 合并成一个 list（按 id 去重，
+   如 "fee" 与 "cost" 都命中 `P53-tuition_fee`），generator 一次生成，而不是每子问题各生成一次。
+   证据块自带 `[P53 | Entrance Requirements]` 标签，统一 QA_PROMPT 据此对号入座。
+3. **programme_ref 的继承与覆盖**：顶层 `programme_ref` 是整轮共享引用；跨课程复合（
+   "X 的学费和 Y 的英语要求"）时，子 decision 自带的 `programme_ref` 覆盖它。
+
+### 可靠性防线（Phase 0 探针驱动的设计）
+
+Phase 0 对 12 条复合 query 跑了三轮 live 探针，发现 deepseek-v4-flash 的嵌套 list 结构化输出不稳定：
+`field` 约 25–33% 概率解码为 None，且会把 JSON 泄漏进自由文本 `sub_query`（
+"…? field: tuition_fee, programme: …"）。因此 router 节点不信任 schema 约束，叠加了三层防线：
+
+1. **确定性 field 修复**：`field=None` 时从 `sub_query` 文本用关键词表反查（零 LLM 成本）。
+2. **一次盲重试**：修复失败（或 sub_query 含泄漏 JSON）时重调一次。
+3. **规则兜底**：仍失败则退回 `classify_query` + `extract_field` 的 v1 规则路由，保证图总能拿到可用 plan。
+
+另外，多轮场景下模型会把**历史轮已回答过的问题**重新吐成 decision（Phase 0 的 D2 用例），
+prompt 明确禁止重发历史问题，只切分最新一轮。
+
+### 边界与后续
+
+- 跨课程复合（不同 programme_ref）已在 schema 与 dispatcher 层面支持，但未做端到端验证。
+- 跨 intent 复合（如 "推荐一个项目 + 告诉我它的学费"）router 能识别出 summary + metadata 两条
+  decision，但 dispatcher 合并后的证据交给单一生成器，提示词人格不统一——这是将来上 **sub-agent**
+  （每个子问题独立走一遍 路由→检索→生成，再聚合）的触发条件，当前未实现。
+- 子问题数量上限 4（`MAX_DECISIONS`），超出截断。
 
 ---
 

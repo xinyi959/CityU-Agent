@@ -55,7 +55,11 @@ FIELD_LABELS = {
     "tuition_fee": "Tuition Fee",
     "programme_website": "Programme Website",
     "intermediate_award": "Intermediate Award",
-    "deadline":"Application Deadline"
+    "deadline":"Application Deadline",
+    # router Literal aliases (RouterSubDecision.field) -> display labels
+    "study_mode": "Mode of Study",
+    "duration": "Normal Study Period",
+    "credit": "Minimum No. of Credits Required",
 }
 
 
