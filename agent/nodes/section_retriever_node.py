@@ -41,7 +41,6 @@ def section_retriever_node(state):
 
     out = {
         "evidence": evidence,
-        "retrieval_type": "section",
     }
     if programme:
         out["resolved_programme_ref"] = {

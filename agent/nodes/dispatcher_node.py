@@ -55,7 +55,6 @@ def dispatcher_node(state):
         sub_state = {
             **state,
             "query": dec.get("sub_query") or state.get("query", ""),
-            "retrieval_type": dec["retrieval_type"],
             "field": dec.get("field"),
             "programme_ref": (
                 dec.get("programme_ref") or state.get("programme_ref")

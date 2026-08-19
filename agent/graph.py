@@ -44,7 +44,7 @@ from agent.nodes.citation import citation_formatter
 from agent.nodes.dispatcher_node import dispatcher_node
 from agent.nodes.router_node import router_node
 
-from agent.state import AgentState
+from agent.state import AgentState, InputState, OutputState
 
 load_dotenv()
 
@@ -52,7 +52,11 @@ def input_adapter(state: AgentState):
     messages = state.get("messages", [])
 
     if not messages:
-        raise ValueError("No messages provided")
+        # query-only input (CLI / direct invoke): the caller sets `query`
+        # directly, there is no message to extract it from.
+        if state.get("query"):
+            return {"query": state["query"]}
+        raise ValueError("No messages or query provided")
 
     while (
         isinstance(messages, list)
@@ -128,7 +132,11 @@ def output_adapter(state: AgentState):
 
 
 def build_graph(answer_node=generate_answer, citation_node=citation_formatter):
-    graph = StateGraph(AgentState)
+    graph = StateGraph(
+        AgentState,
+        input_schema=InputState,
+        output_schema=OutputState,
+    )
 
     graph.add_node("input_adapter", input_adapter)
     graph.add_node("output_adapter", output_adapter)

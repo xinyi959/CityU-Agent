@@ -81,7 +81,6 @@ def metadata_retriever_node(state):
         ]
         return {
             "evidence": evidence,
-            "retrieval_type": "metadata",
             "resolved_programme_ref": {
                 "programme_id": pid,
                 "programme_name": programme.get("name"),
@@ -106,5 +105,4 @@ def metadata_retriever_node(state):
     ]
     return {
         "evidence": evidence,
-        "retrieval_type": "metadata",
     }

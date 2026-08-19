@@ -109,22 +109,31 @@ generator  →  citation  →  output_adapter  →  END
 
 ### 2.2 State 对象（State Object）
 
-`AgentState` 是一个 `TypedDict`，是贯穿所有节点的唯一共享上下文：
+图状态拆成三个 `TypedDict`，`StateGraph` 用 `input_schema=` / `output_schema=` 收窄公开边界：
 
 ```python
-class AgentState(TypedDict):
-    query: str            # 用户原始提问（入口写入）
+# 公开输入契约（app.invoke 接受的字段子集）
+class InputState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]  # chat UI 入口
+    query: str                                            # CLI / 直接调用入口
+
+# 公开输出契约（app.invoke 返回的字段子集）
+class OutputState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]  # 含最终 AIMessage
+    final_response: str   # 最终输出
+    citations: list       # 结构化引用列表
+
+# 内部全量状态（贯穿所有节点）
+class AgentState(InputState, OutputState):
     intent: str           # 路由结果（router 写入，如 "qa"）
-    retrieval_type: str   # decisions[0].retrieval_type（向后兼容旧单决策路径）
-    field: str | None     # decisions[0].field（同上）
     decisions: list       # router 写入：每个子问题一条 decision（Phase 1+）
     programme_ref: dict   # router 写入：本轮共享的课程引用（Phase 1+）
     resolved_programme_ref: dict  # retriever 回填：已确认的课程引用，供多轮复用
     evidence: list        # 检索到的证据列表 [Evidence, ...]（dispatcher 写入）
     answer: str           # LLM 生成的正文（generator 写入）
-    citations: list       # 结构化引用列表（citation 写入）
-    final_response: str   # 最终输出（citation 写入）
 ```
+
+`intent` / `decisions` / `evidence` / `answer` 等内部字段不再出现在 `app.invoke` 的返回值里（调试时可经 `stream_mode="values"` 或 `get_state()` 观察）。
 
 `programme_ref`（router 的文本提取，id 常为 None）与 `resolved_programme_ref`（retriever 用名字匹配回填 id）
 是两个不同的字段：后者是前者的“确认版”，多轮对话里下一轮省略指代时优先复用（见
@@ -135,7 +144,7 @@ class AgentState(TypedDict):
 | 节点名 | 文件 | 输入（读 state） | 输出（写 state） | 核心逻辑 |
 |---|---|---|---|---|
 | `input_adapter` | `agent/graph.py` | `messages` | `query` | 从消息列表提取最后一条用户文本 |
-| `router` | `agent/node/router_node.py` | `messages` | `intent`, `retrieval_type`, `field`, `programme_ref`, `decisions` | LLM 语义路由（`with_structured_output(RouterDecisionList)`）；字段修复 + 重试 + 规则兜底 |
+| `router` | `agent/node/router_node.py` | `messages` | `intent`, `programme_ref`, `decisions` | LLM 语义路由（`with_structured_output(RouterDecisionList)`）；字段修复 + 重试 + 规则兜底 |
 | `dispatcher` | `agent/node/dispatcher_node.py` | `decisions`, `query`, `programme_ref` | `evidence`, `resolved_programme_ref` | 循环 decisions，按 retrieval_type 调用 retriever 节点，合并证据并去重 |
 | `generator` | `agent/node/answer_node.py` | `query`, `evidence`, `intent` | `answer` | `format_evidence` + `SystemMessage`/`HumanMessage` → LLM（qa 用统一 QA_PROMPT，recommendation/comparison 用 SUMMARY_PROMPT） |
 | `citation` | `agent/node/citation.py` | `answer`, `evidence` | `citations`, `final_response` | 组装 `Sources:` 块 |

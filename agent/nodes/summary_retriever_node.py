@@ -16,5 +16,4 @@ def summary_retriever_node(state):
     ]
     return {
         "evidence": evidence,
-        "retrieval_type": "summary",
     }

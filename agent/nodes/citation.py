@@ -15,7 +15,7 @@ section and confidence:
 The structured ``citations`` list (id, programme, section, score, content)
 is stored in state for programmatic use.
 """
-from agent.models import Citation
+from agent.state import Citation
 from rag.programme_resolver import get_programmes
 
 

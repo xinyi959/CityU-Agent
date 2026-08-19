@@ -13,9 +13,17 @@ import time
 from agent.graph import app
 
 
-def answer(query: str) -> dict:
+def answer(query: str) -> tuple[dict, float]:
+    """Run the graph and return its final full state.
+
+    ``app.invoke`` returns only the public OutputState (messages,
+    final_response, citations); the CLI is a debug tool, so it streams the
+    internal values to also show routing intent and evidence counts.
+    """
     t0 = time.time()
-    result = app.invoke({"query": query})
+    result = None
+    for chunk in app.stream({"query": query}, stream_mode="values"):
+        result = chunk
     return result, time.time() - t0
 
 

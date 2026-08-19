@@ -51,12 +51,7 @@ def format_evidence(evidence_list) -> str:
 
 
 def generate_answer(state):
-    print(
-        "RETRIEVAL TYPE:",
-        state.get("retrieval_type"),
-        "INTENT:",
-        state.get("intent"),
-    )
+    print("INTENT:", state.get("intent"))
 
     intent = state.get("intent")
     prompt = (

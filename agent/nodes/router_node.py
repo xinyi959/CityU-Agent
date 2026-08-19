@@ -22,7 +22,7 @@ graph always receives a usable plan.
 
 import re
 
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 
 from agent.llm import model
 from agent.state.router_schema import (
@@ -30,6 +30,7 @@ from agent.state.router_schema import (
     RouterDecisionList,
     RouterSubDecision,
 )
+from rag.programme_resolver import extract_programme_ref
 
 ROUTER_PROMPT = """
 You are the routing agent for CityUHK postgraduate assistant.
@@ -209,11 +210,55 @@ def _is_valid(decision: RouterSubDecision) -> bool:
     return True
 
 
+def _repair_programme_ref(decision: RouterSubDecision) -> RouterSubDecision:
+    """Fill an empty per-decision programme_ref from the sub_query text.
+
+    The model sometimes drops programme_ref entirely (Phase-0 decode
+    instability). The sub_query almost always carries the programme name
+    (the model expands omitted referents), so we re-extract it
+    deterministically. No-op when the sub_query has no programme mention.
+    """
+    if decision.programme_ref and (
+        decision.programme_ref.programme_id
+        or decision.programme_ref.programme_name
+    ):
+        return decision
+    ref = extract_programme_ref(decision.sub_query)
+    if ref.get("programme_id") or ref.get("programme_name"):
+        decision.programme_ref = ProgrammeRefModel(**ref)
+    return decision
+
+
+def _repair_top_programme_ref(
+    decision_list: RouterDecisionList,
+) -> RouterDecisionList:
+    """Fill an empty top-level programme_ref from the first decision's ref.
+
+    The top-level ref is the programme shared by the whole question; when
+    the model drops it, the first sub-question's referent is a reasonable
+    default (cross-programme compounds carry their own per-decision refs).
+    """
+    if decision_list.programme_ref and (
+        decision_list.programme_ref.programme_id
+        or decision_list.programme_ref.programme_name
+    ):
+        return decision_list
+    for d in decision_list.decisions:
+        if d.programme_ref and (
+            d.programme_ref.programme_id or d.programme_ref.programme_name
+        ):
+            decision_list.programme_ref = d.programme_ref
+            break
+    return decision_list
+
+
 def _prepare(decision_list: RouterDecisionList) -> RouterDecisionList:
-    """Cap decision count and repair missing fields."""
+    """Cap decision count, repair missing fields and programme refs."""
     decision_list.decisions = decision_list.decisions[:MAX_DECISIONS]
     for d in decision_list.decisions:
         _repair_field(d)
+        _repair_programme_ref(d)
+    _repair_top_programme_ref(decision_list)
     return decision_list
 
 
@@ -267,8 +312,13 @@ def _fallback_decision_list(query: str) -> RouterDecisionList:
 
 
 def router_node(state):
-    messages = state["messages"]
+    messages = state.get("messages") or []
     query = state.get("query") or ""
+
+    # Query-only input (CLI / direct invoke): synthesize the user turn from
+    # `query` so the LLM router has a message to route on.
+    if not messages and query:
+        messages = [HumanMessage(content=query)]
 
     decision_list = None
     for _ in range(2):
@@ -299,13 +349,8 @@ def router_node(state):
         [(d.retrieval_type, d.field) for d in decision_list.decisions],
     )
 
-    first = decision_list.decisions[0] if decision_list.decisions else None
     return {
         "intent": decision_list.intent,
-        # Back-compat with the single-decision graph: routing signals of the
-        # first decision. Phase 2 (dispatcher) consumes `decisions` instead.
-        "retrieval_type": first.retrieval_type if first else "section",
-        "field": first.field if first else None,
         "programme_ref": _to_programme_ref(decision_list.programme_ref),
         "decisions": [d.model_dump() for d in decision_list.decisions],
     }
