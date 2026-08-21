@@ -6,6 +6,6 @@ load_dotenv()
 
 
 model = ChatOpenRouter(
-    model="deepseek/deepseek-v4-flash",
+    model="stealth/ox-alpha",
     temperature=0,
 )

@@ -26,8 +26,8 @@ Graph:
      END
 
 * router      -> RouterDecisionList: one decision per sub-question, each
-                 with retrieval_type / field / sub_query (compound queries
-                 produce several decisions)
+                 with field / sub_query (retrieval_type is derived from
+                 field; compound queries produce several decisions)
 * dispatcher  -> calls the metadata / section / summary retriever once per
                  decision and merges the Evidence (dedup by id)
 * generator   -> answers from the merged Evidence; citation appends Sources.

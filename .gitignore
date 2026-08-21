@@ -5,4 +5,4 @@ vectorstore/
 .env
 .langgraph_api
 
-docs/git_workflow_guide.md
+docs/

@@ -57,23 +57,29 @@ def retrieve_summary(query: str, k: int = 5):
     )
 
 
-def retrieve_section(query: str, programme_id: str | None = None, k: int = 5):
-    """Detailed-QA retrieval: programme section documents (doc, score) pairs."""
+def retrieve_section(
+    query: str,
+    programme_id: str | None = None,
+    programme_ids: list[str] | None = None,
+    k: int = 5,
+):
+    """Detailed-QA retrieval: programme section documents (doc, score) pairs.
 
-    vectorstore = get_vectorstore(
-        SECTION_COLLECTION
-    )
+    ``programme_id`` filters to one programme; ``programme_ids`` filters to a
+    set of programmes (used when a recommendation resolves to several
+    programmes and a follow-up sub-question is scoped to them).
+    """
+
+    vectorstore = get_vectorstore(SECTION_COLLECTION)
+
+    where = None
     if programme_id:
-        return vectorstore.similarity_search_with_score(
-            query,
-            k=k,
-            filter={
-                "programme_id": programme_id
-            },
-        )
+        where = {"programme_id": programme_id}
+    elif programme_ids:
+        where = {"programme_id": {"$in": list(programme_ids)}}
 
     return vectorstore.similarity_search_with_score(
-        query, k=k
+        query, k=k, filter=where
     )
 
 

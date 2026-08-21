@@ -12,7 +12,11 @@ Fallback -> Evidence objects from ``programme_metadata`` vector search.
 
 from rag.evidence import Evidence
 from rag.metadata_builder import FIELD_LABELS, build_metadata_document, value_to_text
-from rag.programme_resolver import extract_field, resolve_programme_ref
+from rag.programme_resolver import (
+    extract_field,
+    find_programme,
+    resolve_programme_ref,
+)
 from rag.retriever import retrieve_metadata
 
 
@@ -25,6 +29,10 @@ def _render_fee(value: dict) -> str:
     ):
         if value.get(key):
             groups.append(f"{label}:\n{value[key]}")
+    if not groups:
+        # Programme has a fee source URL but no parsed local/non-local rates
+        # (e.g. P83). Never hand the generator an empty fee block.
+        return "Not available in our records. See the programme website."
     return "\n\n".join(groups)
 
 
@@ -34,6 +42,37 @@ def _split_source(value):
         rest = {k: v for k, v in value.items() if k != "source"}
         return rest, value.get("source")
     return value, None
+
+
+def _evidence_for_programme(programme: dict, field: str) -> Evidence:
+    """Exact structured lookup for ONE resolved programme + field.
+
+    Shared by the single-programme path and the recommendation-scoped path
+    (which loops over several programme ids).
+    """
+    pid = programme["programme_id"]
+    raw = programme.get("metadata", {}).get(field)
+    section = FIELD_LABELS.get(field, field or "metadata")
+
+    url = None
+    if field == "tuition_fee" and isinstance(raw, dict):
+        content = _render_fee(raw)
+        url = raw.get("source")
+    elif raw is not None:
+        clean, url = _split_source(raw)
+        content = value_to_text(clean) or ""
+    else:
+        content = build_metadata_document(programme).page_content
+
+    return Evidence(
+        id=f"{pid}-{field or 'metadata'}",
+        programme_id=pid,
+        section=section,
+        content=content,
+        score=1.0,
+        source_type="metadata",
+        metadata={"url": url} if url else None,
+    )
 
 
 def metadata_retriever_node(state):
@@ -54,38 +93,29 @@ def metadata_retriever_node(state):
     )
 
     if programme is not None:
-        pid = programme["programme_id"]
-        raw = programme.get("metadata", {}).get(field)
-        section = FIELD_LABELS.get(field, field or "metadata")
-
-        url = None
-        if field == "tuition_fee" and isinstance(raw, dict):
-            content = _render_fee(raw)
-            url = raw.get("source")
-        elif raw is not None:
-            clean, url = _split_source(raw)
-            content = value_to_text(clean) or ""
-        else:
-            content = build_metadata_document(programme).page_content
-
-        evidence = [
-            Evidence(
-                id=f"{pid}-{field or 'metadata'}",
-                programme_id=pid,
-                section=section,
-                content=content,
-                score=1.0,
-                source_type="metadata",
-                metadata={"url": url} if url else None,
-            )
-        ]
         return {
-            "evidence": evidence,
+            "evidence": [_evidence_for_programme(programme, field)],
             "resolved_programme_ref": {
-                "programme_id": pid,
+                "programme_id": programme["programme_id"],
                 "programme_name": programme.get("name"),
             },
         }
+
+    # Recommendation-scoped path: the sub-question has no programme referent
+    # of its own ("how much should I pay?") but an earlier summary decision in
+    # the same turn resolved a set of programmes -- exact lookup each one.
+    scope_ids = state.get("programme_ids") or []
+    if scope_ids:
+        evidence = []
+        for pid in scope_ids:
+            programme = find_programme(
+                {"programme_id": pid, "programme_name": None}
+            )
+            if programme is not None:
+                evidence.append(_evidence_for_programme(programme, field))
+        if evidence:
+            # No singular resolved_programme_ref: the referent is a set.
+            return {"evidence": evidence}
 
     # fallback: no resolvable programme -> semantic search on metadata index
     evidence = [

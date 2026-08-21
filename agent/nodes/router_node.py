@@ -8,6 +8,11 @@ Phase 0 probe findings this node encodes:
    JSON ("field: tuition_fee, programme: ..."). So we do NOT trust the
    schema alone -- a deterministic repair layer fills missing fields
    from the sub_query wording, and a blind retry is the backstop.
+
+   The model outputs ONE routing signal per sub-question (`field`);
+   `retrieval_type` is derived from it (retrieval_type_of) so a
+   mismatched (field, retrieval_type) pair -- the old two-axis
+   coordination failure -- is structurally impossible.
 2. The model tends to re-emit already-answered history questions as
    extra decisions in multi-turn compound turns -- the prompt forbids it.
 3. Programme codes ("P53") are not mapped to names by the model -- the
@@ -29,9 +34,11 @@ from agent.state.router_schema import (
     ProgrammeRefModel,
     RouterDecisionList,
     RouterSubDecision,
+    retrieval_type_of,
 )
 from rag.programme_resolver import extract_programme_ref
 
+# 输出intent, retrieval type, field
 ROUTER_PROMPT = """
 You are the routing agent for CityUHK postgraduate assistant.
 
@@ -62,32 +69,26 @@ recommendation:
 comparison:
 - comparing multiple programmes
 
-## Retrieval Type (per sub-decision)
-
-metadata:
-- exact structured facts
-- tuition fee
-- deadline
-- duration
-- credit
-- study mode
-
-section:
-- detailed programme information
-- entrance requirements
-- curriculum
-- course information
-
-summary:
-- programme recommendation
-- programme overview
-- programme comparison
-
 ## field (per sub-decision)
 
-metadata fields: tuition_fee, deadline, duration, credit, study_mode
-section fields:  entrance_requirement, curriculum
-summary fields:  leave `field` empty.
+One routing signal per sub-question: pick the SINGLE `field` that the
+sub-question asks about. The retrieval path follows automatically from
+the field -- do NOT output a retrieval type.
+
+metadata fields (exact structured facts):
+- tuition_fee   -- tuition fee, fees, cost, how much
+- deadline      -- application deadline, closing date, apply by
+- duration      -- how long, study period, length of
+- credit        -- credit units, credits
+- study_mode    -- mode of study, full-time, part-time
+
+section fields (detailed programme information):
+- entrance_requirement -- entrance/admission requirements, English
+                          requirements, IELTS/TOEFL
+- curriculum           -- curriculum, courses, syllabus
+
+summary (programme recommendation, overview, comparison):
+- "summary"
 
 Common mappings: "English requirements" -> entrance_requirement,
 "curriculum"/"courses" -> curriculum, "how long" -> duration.
@@ -153,9 +154,6 @@ FIELD_KEYWORDS = [
     ("curriculum", ["curriculum", "courses", "course", "syllabus"]),
 ]
 
-METADATA_FIELDS = {"tuition_fee", "deadline", "duration", "credit", "study_mode"}
-SECTION_FIELDS = {"entrance_requirement", "curriculum"}
-
 # rag/programme_resolver.extract_field() key -> router field literal
 METADATA_FIELD_MAP = {
     "tuition_fee": "tuition_fee",
@@ -176,10 +174,9 @@ def _match(q: str, keyword: str) -> bool:
 def _repair_field(decision: RouterSubDecision) -> RouterSubDecision:
     """Fill a missing `field` from the sub_query wording.
 
-    Only applies to metadata/section decisions; summary decisions are
-    legitimately field-less.
+    No-op when the model already emitted a field ("summary" included).
     """
-    if decision.field is not None or decision.retrieval_type == "summary":
+    if decision.field is not None:
         return decision
     q = decision.sub_query.lower()
     for field, keywords in FIELD_KEYWORDS:
@@ -190,24 +187,18 @@ def _repair_field(decision: RouterSubDecision) -> RouterSubDecision:
 
 
 def _is_valid(decision: RouterSubDecision) -> bool:
-    """A decision is usable if it can drive one retriever call."""
+    """A decision is usable if it can drive one retriever call.
+
+    retrieval_type is derived from field, so the only failures left are
+    a missing/leaked sub_query and an unfilled field.
+    """
     if not decision.sub_query or len(decision.sub_query) < 3:
         return False
     # leaked structured-output JSON inside the free-text sub_query
     if "field:" in decision.sub_query or "programme:" in decision.sub_query:
         return False
 
-    if decision.retrieval_type == "summary":
-        return decision.field is None
-
-    if decision.field is None:
-        return False  # repair could not fill it
-
-    if decision.field in METADATA_FIELDS and decision.retrieval_type != "metadata":
-        return False
-    if decision.field in SECTION_FIELDS and decision.retrieval_type != "section":
-        return False
-    return True
+    return decision.field is not None  # repair could not fill it
 
 
 def _repair_programme_ref(decision: RouterSubDecision) -> RouterSubDecision:
@@ -252,8 +243,15 @@ def _repair_top_programme_ref(
     return decision_list
 
 
-def _prepare(decision_list: RouterDecisionList) -> RouterDecisionList:
-    """Cap decision count, repair missing fields and programme refs."""
+def _prepare(decision_list: RouterDecisionList) -> RouterDecisionList | None:
+    """Cap decision count, repair missing fields and programme refs.
+
+    Defensive: a structured-output decode can yield None or an empty
+    ``decisions`` list without raising; return it untouched so the caller's
+    validity check rejects it and falls through to the next attempt.
+    """
+    if decision_list is None or not decision_list.decisions:
+        return decision_list
     decision_list.decisions = decision_list.decisions[:MAX_DECISIONS]
     for d in decision_list.decisions:
         _repair_field(d)
@@ -281,14 +279,18 @@ def _fallback_decision_list(query: str) -> RouterDecisionList:
     from rag.router import classify_query
 
     retrieval_type = classify_query(query) if query else "section"
+    q = (query or "").lower()
 
     field = None
     if retrieval_type == "metadata":
         field = METADATA_FIELD_MAP.get(extract_field(query) or "")
         if field is None:
-            retrieval_type = "section"  # keyword hit but no field matched
-    elif retrieval_type == "section":
-        q = query.lower()
+            # metadata keyword hit but no field matched -> detailed
+            # requirements instead of a bare metadata dump
+            field = "entrance_requirement"
+    elif retrieval_type == "summary":
+        field = "summary"
+    else:
         field = (
             "curriculum"
             if re.search(r"curriculum|courses?\b", q)
@@ -303,7 +305,6 @@ def _fallback_decision_list(query: str) -> RouterDecisionList:
         ),
         decisions=[
             RouterSubDecision(
-                retrieval_type=retrieval_type,
                 field=field,
                 sub_query=query,
             )
@@ -330,13 +331,23 @@ def router_node(state):
             print("ROUTER RETRY (parse error):", type(exc).__name__)
             continue
 
+        # structured output can decode to None WITHOUT raising (empty /
+        # refusal reply from the model). _prepare would crash on .decisions,
+        # so reject it here and retry -- the rule fallback is the backstop.
+        if candidate is None or not candidate.decisions:
+            print("ROUTER RETRY (empty structured output):", type(candidate).__name__)
+            continue
+
         candidate = _prepare(candidate)
         if candidate.decisions and all(_is_valid(d) for d in candidate.decisions):
             decision_list = candidate
             break
         print(
             "ROUTER RETRY (invalid plan):",
-            [(d.retrieval_type, d.field) for d in candidate.decisions],
+            [
+                (retrieval_type_of(d.field), d.field)
+                for d in candidate.decisions
+            ],
         )
 
     if decision_list is None:
@@ -346,11 +357,22 @@ def router_node(state):
     print(
         "ROUTER PLAN:",
         decision_list.intent,
-        [(d.retrieval_type, d.field) for d in decision_list.decisions],
+        [
+            (retrieval_type_of(d.field), d.field)
+            for d in decision_list.decisions
+        ],
     )
 
     return {
         "intent": decision_list.intent,
         "programme_ref": _to_programme_ref(decision_list.programme_ref),
-        "decisions": [d.model_dump() for d in decision_list.decisions],
+        "decisions": [
+            {
+                **d.model_dump(),
+                # derived routing path (kept on the dict for the
+                # dispatcher and for backward-compatible consumers)
+                "retrieval_type": retrieval_type_of(d.field),
+            }
+            for d in decision_list.decisions
+        ],
     }

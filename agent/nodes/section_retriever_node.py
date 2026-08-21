@@ -21,11 +21,17 @@ def section_retriever_node(state):
 
     programme_id = programme["programme_id"] if programme else None
 
-    docs = retrieve_section(
-        query,
-        programme_id=programme_id,
-        k=5
-    )
+    # Recommendation-scoped path: no single programme resolved but an earlier
+    # summary decision in the same turn produced a set of programme ids ->
+    # filter the section search to them.
+    scope_ids = state.get("programme_ids") or []
+
+    if programme_id:
+        docs = retrieve_section(query, programme_id=programme_id, k=5)
+    elif scope_ids:
+        docs = retrieve_section(query, programme_ids=scope_ids, k=5)
+    else:
+        docs = retrieve_section(query, k=5)
 
     evidence = [
         Evidence(

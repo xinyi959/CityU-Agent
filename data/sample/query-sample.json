@@ -1,0 +1,1357 @@
+[
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                },
+                {
+                    "content": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+                    "additional_kwargs": {
+                        "citations": [
+                            {
+                                "id": "P53-Entrance Requirements",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Entrance Requirements",
+                                "source_type": "retrieval",
+                                "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                                "confidence": "Medium",
+                                "url": null
+                            },
+                            {
+                                "id": "P53-Course Description",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Course Description",
+                                "source_type": "retrieval",
+                                "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                                "confidence": "Low",
+                                "url": null
+                            },
+                            {
+                                "id": "P53-Did You Know?",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Did You Know?",
+                                "source_type": "retrieval",
+                                "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                                "confidence": "Low",
+                                "url": null
+                            },
+                            {
+                                "id": "P53-Useful Links",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Useful Links",
+                                "source_type": "retrieval",
+                                "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                                "confidence": "Low",
+                                "url": null
+                            },
+                            {
+                                "id": "P53-Programme Aims and Objectives",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Programme Aims and Objectives",
+                                "source_type": "retrieval",
+                                "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                                "confidence": "Low",
+                                "url": null
+                            },
+                            {
+                                "id": "P53-tuition_fee",
+                                "programme_id": "P53",
+                                "programme_name": "MSc Computer Science",
+                                "section": "Tuition Fee",
+                                "source_type": "metadata",
+                                "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                                "confidence": "High",
+                                "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                            }
+                        ]
+                    },
+                    "response_metadata": {},
+                    "type": "ai",
+                    "name": null,
+                    "id": "6401078f-ea4d-477b-b900-d5e02cb4dd42",
+                    "tool_calls": [],
+                    "invalid_tool_calls": [],
+                    "usage_metadata": null
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?",
+            "final_response": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+            "citations": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Entrance Requirements",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "confidence": "Medium",
+                    "url": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Course Description",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Did You Know?",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Useful Links",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Programme Aims and Objectives",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Tuition Fee",
+                    "source_type": "metadata",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "confidence": "High",
+                    "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                }
+            ],
+            "intent": "qa",
+            "decisions": [
+                {
+                    "field": "entrance_requirement",
+                    "sub_query": "What are the english requirements of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "section"
+                },
+                {
+                    "field": "tuition_fee",
+                    "sub_query": "What is the tuition fee of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "metadata"
+                }
+            ],
+            "evidence": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "section": "Entrance Requirements",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "score": 0.4083443284034729,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "section": "Course Description",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "score": 0.5323395729064941,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "section": "Did You Know?",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "score": 0.5822317600250244,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "section": "Useful Links",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "score": 0.6063661575317383,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "section": "Programme Aims and Objectives",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "score": 0.6234648823738098,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "section": "Tuition Fee",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "score": 1.0,
+                    "source_type": "metadata",
+                    "metadata": {
+                        "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                    }
+                }
+            ],
+            "answer": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+            "programme_ref": {
+                "programme_id": null,
+                "programme_name": "MSc Computer Science"
+            },
+            "resolved_programme_ref": {
+                "programme_id": "P53",
+                "programme_name": "MSc Computer Science"
+            }
+        },
+        "next": [],
+        "tasks": [],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 6,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:31:34.617700+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d193-0f31-6858-8006-6d949f78a358",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d193-0f2d-693a-8005-bea88badc7bb",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d193-0f31-6858-8006-6d949f78a358",
+        "parent_checkpoint_id": "1f19d193-0f2d-693a-8005-bea88badc7bb"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?",
+            "final_response": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+            "citations": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Entrance Requirements",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "confidence": "Medium",
+                    "url": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Course Description",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Did You Know?",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Useful Links",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Programme Aims and Objectives",
+                    "source_type": "retrieval",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "confidence": "Low",
+                    "url": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "programme_name": "MSc Computer Science",
+                    "section": "Tuition Fee",
+                    "source_type": "metadata",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "confidence": "High",
+                    "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                }
+            ],
+            "intent": "qa",
+            "decisions": [
+                {
+                    "field": "entrance_requirement",
+                    "sub_query": "What are the english requirements of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "section"
+                },
+                {
+                    "field": "tuition_fee",
+                    "sub_query": "What is the tuition fee of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "metadata"
+                }
+            ],
+            "evidence": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "section": "Entrance Requirements",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "score": 0.4083443284034729,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "section": "Course Description",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "score": 0.5323395729064941,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "section": "Did You Know?",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "score": 0.5822317600250244,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "section": "Useful Links",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "score": 0.6063661575317383,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "section": "Programme Aims and Objectives",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "score": 0.6234648823738098,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "section": "Tuition Fee",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "score": 1.0,
+                    "source_type": "metadata",
+                    "metadata": {
+                        "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                    }
+                }
+            ],
+            "answer": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+            "programme_ref": {
+                "programme_id": null,
+                "programme_name": "MSc Computer Science"
+            },
+            "resolved_programme_ref": {
+                "programme_id": "P53",
+                "programme_name": "MSc Computer Science"
+            }
+        },
+        "next": [
+            "output_adapter"
+        ],
+        "tasks": [
+            {
+                "id": "9d5eb4c8-edfb-a7c1-c5ad-a0960e47b632",
+                "name": "output_adapter",
+                "path": [
+                    "__pregel_pull",
+                    "output_adapter"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "messages": [
+                        {
+                            "content": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+                            "additional_kwargs": {
+                                "citations": [
+                                    {
+                                        "id": "P53-Entrance Requirements",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Entrance Requirements",
+                                        "source_type": "retrieval",
+                                        "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                                        "confidence": "Medium",
+                                        "url": null
+                                    },
+                                    {
+                                        "id": "P53-Course Description",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Course Description",
+                                        "source_type": "retrieval",
+                                        "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                                        "confidence": "Low",
+                                        "url": null
+                                    },
+                                    {
+                                        "id": "P53-Did You Know?",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Did You Know?",
+                                        "source_type": "retrieval",
+                                        "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                                        "confidence": "Low",
+                                        "url": null
+                                    },
+                                    {
+                                        "id": "P53-Useful Links",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Useful Links",
+                                        "source_type": "retrieval",
+                                        "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                                        "confidence": "Low",
+                                        "url": null
+                                    },
+                                    {
+                                        "id": "P53-Programme Aims and Objectives",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Programme Aims and Objectives",
+                                        "source_type": "retrieval",
+                                        "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                                        "confidence": "Low",
+                                        "url": null
+                                    },
+                                    {
+                                        "id": "P53-tuition_fee",
+                                        "programme_id": "P53",
+                                        "programme_name": "MSc Computer Science",
+                                        "section": "Tuition Fee",
+                                        "source_type": "metadata",
+                                        "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                                        "confidence": "High",
+                                        "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                                    }
+                                ]
+                            },
+                            "response_metadata": {},
+                            "type": "ai",
+                            "name": null,
+                            "id": "6401078f-ea4d-477b-b900-d5e02cb4dd42",
+                            "tool_calls": [],
+                            "invalid_tool_calls": [],
+                            "usage_metadata": null
+                        }
+                    ]
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 5,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:31:34.616087+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d193-0f2d-693a-8005-bea88badc7bb",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d193-0f2b-63c2-8004-b470f13ec496",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d193-0f2d-693a-8005-bea88badc7bb",
+        "parent_checkpoint_id": "1f19d193-0f2b-63c2-8004-b470f13ec496"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?",
+            "intent": "qa",
+            "decisions": [
+                {
+                    "field": "entrance_requirement",
+                    "sub_query": "What are the english requirements of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "section"
+                },
+                {
+                    "field": "tuition_fee",
+                    "sub_query": "What is the tuition fee of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "metadata"
+                }
+            ],
+            "evidence": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "section": "Entrance Requirements",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "score": 0.4083443284034729,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "section": "Course Description",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "score": 0.5323395729064941,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "section": "Did You Know?",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "score": 0.5822317600250244,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "section": "Useful Links",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "score": 0.6063661575317383,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "section": "Programme Aims and Objectives",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "score": 0.6234648823738098,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "section": "Tuition Fee",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "score": 1.0,
+                    "source_type": "metadata",
+                    "metadata": {
+                        "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                    }
+                }
+            ],
+            "answer": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit",
+            "programme_ref": {
+                "programme_id": null,
+                "programme_name": "MSc Computer Science"
+            },
+            "resolved_programme_ref": {
+                "programme_id": "P53",
+                "programme_name": "MSc Computer Science"
+            }
+        },
+        "next": [
+            "citation"
+        ],
+        "tasks": [
+            {
+                "id": "900032c2-ff38-b771-bd2d-9ed004ec604a",
+                "name": "citation",
+                "path": [
+                    "__pregel_pull",
+                    "citation"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "citations": [
+                        {
+                            "id": "P53-Entrance Requirements",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Entrance Requirements",
+                            "source_type": "retrieval",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                            "confidence": "Medium",
+                            "url": null
+                        },
+                        {
+                            "id": "P53-Course Description",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Course Description",
+                            "source_type": "retrieval",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                            "confidence": "Low",
+                            "url": null
+                        },
+                        {
+                            "id": "P53-Did You Know?",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Did You Know?",
+                            "source_type": "retrieval",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                            "confidence": "Low",
+                            "url": null
+                        },
+                        {
+                            "id": "P53-Useful Links",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Useful Links",
+                            "source_type": "retrieval",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                            "confidence": "Low",
+                            "url": null
+                        },
+                        {
+                            "id": "P53-Programme Aims and Objectives",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Programme Aims and Objectives",
+                            "source_type": "retrieval",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                            "confidence": "Low",
+                            "url": null
+                        },
+                        {
+                            "id": "P53-tuition_fee",
+                            "programme_id": "P53",
+                            "programme_name": "MSc Computer Science",
+                            "section": "Tuition Fee",
+                            "source_type": "metadata",
+                            "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                            "confidence": "High",
+                            "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                        }
+                    ],
+                    "final_response": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit"
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 4,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:31:34.615123+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d193-0f2b-63c2-8004-b470f13ec496",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d192-dd57-6d06-8003-c976001c77fb",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d193-0f2b-63c2-8004-b470f13ec496",
+        "parent_checkpoint_id": "1f19d192-dd57-6d06-8003-c976001c77fb"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?",
+            "intent": "qa",
+            "decisions": [
+                {
+                    "field": "entrance_requirement",
+                    "sub_query": "What are the english requirements of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "section"
+                },
+                {
+                    "field": "tuition_fee",
+                    "sub_query": "What is the tuition fee of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "metadata"
+                }
+            ],
+            "evidence": [
+                {
+                    "id": "P53-Entrance Requirements",
+                    "programme_id": "P53",
+                    "section": "Entrance Requirements",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                    "score": 0.4083443284034729,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Course Description",
+                    "programme_id": "P53",
+                    "section": "Course Description",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                    "score": 0.5323395729064941,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Did You Know?",
+                    "programme_id": "P53",
+                    "section": "Did You Know?",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                    "score": 0.5822317600250244,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Useful Links",
+                    "programme_id": "P53",
+                    "section": "Useful Links",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                    "score": 0.6063661575317383,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-Programme Aims and Objectives",
+                    "programme_id": "P53",
+                    "section": "Programme Aims and Objectives",
+                    "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                    "score": 0.6234648823738098,
+                    "source_type": "retrieval",
+                    "metadata": null
+                },
+                {
+                    "id": "P53-tuition_fee",
+                    "programme_id": "P53",
+                    "section": "Tuition Fee",
+                    "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                    "score": 1.0,
+                    "source_type": "metadata",
+                    "metadata": {
+                        "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                    }
+                }
+            ],
+            "programme_ref": {
+                "programme_id": null,
+                "programme_name": "MSc Computer Science"
+            },
+            "resolved_programme_ref": {
+                "programme_id": "P53",
+                "programme_name": "MSc Computer Science"
+            }
+        },
+        "next": [
+            "generator"
+        ],
+        "tasks": [
+            {
+                "id": "1b763241-4ebb-8979-5ef8-db0f90467a86",
+                "name": "generator",
+                "path": [
+                    "__pregel_pull",
+                    "generator"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "answer": "### English Requirement\n\nApplicants whose entrance qualification is from an institution where the medium of instruction for the **whole programme** is **not** English must fulfill one of the following minimum English proficiency requirements:\n\n- TOEFL (Internet-based test): 79  \n- IELTS (Academic): overall band score 6.5  \n- Chinese mainland’s College English Test Band 6 (CET-6): 450  \n\n**Important conditions:**\n\n- TOEFL and IELTS scores are valid for two years (from the start of the University’s application period).  \n- CET-6 has no validity period.  \n- The following tests are **not** acceptable: Duolingo, GMAT, GRE, IELTS Indicator, IELTS One Skill Retake, IELTS Online, TOEFL iBT Home Edition, TOEFL MyBest Score, TOEIC, and others.\n\n### Tuition Fee\n\n- **Local students:** HK$7,600 per credit  \n- **Non-local students:** HK$9,100 per credit"
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 3,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:31:29.390506+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d192-dd57-6d06-8003-c976001c77fb",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d18f-567c-6080-8002-077eb17386a4",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d192-dd57-6d06-8003-c976001c77fb",
+        "parent_checkpoint_id": "1f19d18f-567c-6080-8002-077eb17386a4"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?",
+            "intent": "qa",
+            "decisions": [
+                {
+                    "field": "entrance_requirement",
+                    "sub_query": "What are the english requirements of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "section"
+                },
+                {
+                    "field": "tuition_fee",
+                    "sub_query": "What is the tuition fee of MSc Computer Science?",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "retrieval_type": "metadata"
+                }
+            ],
+            "programme_ref": {
+                "programme_id": null,
+                "programme_name": "MSc Computer Science"
+            }
+        },
+        "next": [
+            "dispatcher"
+        ],
+        "tasks": [
+            {
+                "id": "c0c5bf36-b5fb-91ef-5658-43f638a37ed4",
+                "name": "dispatcher",
+                "path": [
+                    "__pregel_pull",
+                    "dispatcher"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "evidence": [
+                        {
+                            "id": "P53-Entrance Requirements",
+                            "programme_id": "P53",
+                            "section": "Entrance Requirements",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nEntrance Requirements\n\nTo be eligible for admission, you must satisfy the [General Entrance Requirements](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) and have:\n\n* a recognised bachelor's degree in a computing discipline such as Computer Science, Information Technology, Computer Engineering, Information Systems, or equivalent; or\n* a recognised bachelor's degree in a related discipline such as Electronic Engineering, Applied Mathematics, Manufacturing Engineering, Quantitative Analysis, or equivalent, together with applicable working experience in information technology.\n\nApplicants whose entrance qualification is obtained from an institution where the medium of instruction for the **whole programme** is NOT English should also fulfill the following minimum English proficiency requirement:\n\n* 79 (Internet-based test) in the Test of English as a Foreign Language (TOEFL)@; or\n* an overall band score of 6.5 in International English Language Testing System (IELTS) (Academic)@; or\n* a score of 450 in the Chinese mainland’s College English Test Band 6 (CET-6)\n\nIELTS (UKVI) (Academic) for UK student visa application is acceptable.\n\n@ TOEFL and IELTS scores are considered valid for two years. Applicants are required to provide their English test results obtained within the two years preceding the start of the University's application period. There is no validity period for CET-6.\n\nFor Submission of TOEFL Score to CityUHK:\n\nPlease arrange with the Educational Testing Service (ETS) to send your result(s) directly to the University. The TOEFL institution code for CityUHK is 3401 (Graduate School Admissions) and the Department code is 99.\n\nFor Submission of IELTS Score to CityUHK:\n\nPlease send your result(s) via the IELTS Results Service e-delivery to the University.\n\nThe following English tests are NOT acceptable:\n\n* Duolingo\n* GMAT\n* GRE\n* IELTS Indicator\n* IELTS One Skill Retake\n* IELTS Online\n* TOEFL iBT Home Edition\n* TOEFL MyBest Score\n* TOEIC\n* Others\n\nPlease refer to the updated [admissions website](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/entrance-requirements) for information.\n\nThe definitions of non-local applicants and local applicants are set out below:\n\n## Non-local Applicants\n\nPersons holding the following documents issued by the Immigration Department (IMMD) of the HKSAR are classified as non-local applicants:\n\n* Student visa / entry permit; or\n* Visa / entry permit under the Immigration Arrangements for Non-local Graduates (IANG Visa); or\n* Dependant visa / entry permit for applicants who were 18 years old or above when they were issued with such visa / entry permit by the IMMD\n\nDue to immigration restrictions, nationals from Afghanistan, Cuba, Laos, North Korea (DPRK), Nepal and Vietnam may not be able to obtain a student visa to study in Hong Kong. For details, please click [here](https://www.immd.gov.hk/eng/services/visas/study.html).\n\n## Local Applicants\n\nPersons holding any of the following documents issued by the Immigration Department (IMMD) are classified as local applicants:\n\n* [Hong Kong Permanent Identity Card](https://www.immd.gov.hk/eng/services/hkid.html)\n* Documents issued by the IMMD certifying the right of abode / right to land in Hong Kong\n* One-way permit for entry to Hong Kong\n* Dependant visa / entry permit for applicants who were below 18 years old when they were issued with such visa / entry permit by the IMMD\n* Full-time employment visa / work permit (for part-time study)\n* Visa / entry permit for Quality Migrant Admission Scheme (QMAS)\n* Visa / entry permit for Capital Investment Entrant Scheme (CIES)\n* Visa / Entry permit for Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents\n* Visa label for unconditional stay\n\nIf you need further advice on visa requirements, please contact the [IMMD](https://www.immd.gov.hk/eng/services/index.html).",
+                            "score": 0.4083443284034729,
+                            "source_type": "retrieval",
+                            "metadata": null
+                        },
+                        {
+                            "id": "P53-Course Description",
+                            "programme_id": "P53",
+                            "section": "Course Description",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nCourse Description\n\nThe programme consists of three core courses and two groups of Electives (elective courses). The core courses will enable students to acquire a solid foundation in computer science at the postgraduate level. The elective courses are divided into two groups: Group I and Group II. Students are required to take at least 21 credit units of Electives, including at least 3 credit units of Electives in Group I. The elective courses cover a broad range of areas in the field, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies. Each course is worth 3 credit units except for Internship/Project courses, which are worth 6 credit units. Through suitable choices of elective courses, students may concentrate on a study stream (Artificial Intelligence Stream, Data Science Stream or Information Security Stream) based on their interests. Alternatively, students may also choose any elective courses without concentration on a particular stream. Refer to the programme’s website (<https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/aims>) for details.\n\n![MScCS Info Graph](/pg/-/media/project/cityuhk/academic/pg/programme/program-new-structure/college-of-computing/department-of-computer-science/p53/data/outline/course-description/2025-07-03-graphics_mscs_admission.png?rev=4c26b2180792468eacee062be6f42499&hash=A8CA1722294F1C8BD2B035867888F3B2)",
+                            "score": 0.5323395729064941,
+                            "source_type": "retrieval",
+                            "metadata": null
+                        },
+                        {
+                            "id": "P53-Did You Know?",
+                            "programme_id": "P53",
+                            "section": "Did You Know?",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nDid You Know?\n\n* Students may be considered for the award of the Postgraduate Diploma in Computer Science after obtaining a total of 24 credit units (including all the 3 core courses and at least 3 credit units of elective courses in Group I) with satisfactory academic results if they decide to exit early.\n* The Internship/Project courses are optional. Students may take 2 other elective courses in lieu of the Internship/Project courses.\n* By taking the Internship course, students may gain valuable hands-on industry experiences.\n* By taking one of the Guided Study courses and/or the Project course, students may gain the experience of working on a small-scale research problem (under supervision of an academic staff in the department) to get better prepared for higher research studies.\n* Students will have a good chance of admission to higher research studies if they obtain excellent academic results upon graduation.",
+                            "score": 0.5822317600250244,
+                            "source_type": "retrieval",
+                            "metadata": null
+                        },
+                        {
+                            "id": "P53-Useful Links",
+                            "programme_id": "P53",
+                            "section": "Useful Links",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nUseful Links\n\n[Department of Computer Science](https://www.cs.cityu.edu.hk/academic-programmes/msc-computer-science/curriculum/structures)\n\n[Frequently Asked Questions](https://www.cityu.edu.hk/pg/taught-postgraduate-programmes/faq/)\n\nRemarks:\nYou should check your application result online via your application account from time to time by accessing the account with the electronic ID and password created at the time of your application.",
+                            "score": 0.6063661575317383,
+                            "source_type": "retrieval",
+                            "metadata": null
+                        },
+                        {
+                            "id": "P53-Programme Aims and Objectives",
+                            "programme_id": "P53",
+                            "section": "Programme Aims and Objectives",
+                            "content": "Programme:\nMSc Computer Science\n\nSection:\nProgramme Aims and Objectives\n\nThe programme aims to (1) enable computer professionals to strengthen and upgrade their technical capabilities in computer software development, (2) broaden students’ knowledge and deepen their understanding of key issues of specific areas in computer science, including artificial intelligence, data science, information security, multimedia, and other related contemporary technologies, and (3) prepare graduates to take up research and advanced innovative development work in the industry or pursue higher research studies.",
+                            "score": 0.6234648823738098,
+                            "source_type": "retrieval",
+                            "metadata": null
+                        },
+                        {
+                            "id": "P53-tuition_fee",
+                            "programme_id": "P53",
+                            "section": "Tuition Fee",
+                            "content": "Local Students:\nHK$7,600 per credit\n\nNon-local Students:\nHK$9,100 per credit",
+                            "score": 1.0,
+                            "source_type": "metadata",
+                            "metadata": {
+                                "url": "http://www.cityu.edu.hk/sgs/files/fees/tpg/P53/index.htm"
+                            }
+                        }
+                    ],
+                    "resolved_programme_ref": {
+                        "programme_id": "P53",
+                        "programme_name": "MSc Computer Science"
+                    }
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 2,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:29:54.718924+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d18f-567c-6080-8002-077eb17386a4",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d18e-fe76-6446-8001-1dae26f84b5e",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d18f-567c-6080-8002-077eb17386a4",
+        "parent_checkpoint_id": "1f19d18e-fe76-6446-8001-1dae26f84b5e"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ],
+            "query": "What are the english requirement and tuition fee of MSc Computer Science?"
+        },
+        "next": [
+            "router"
+        ],
+        "tasks": [
+            {
+                "id": "b6cb61b2-858f-c6a1-fcbc-551460e0bb8e",
+                "name": "router",
+                "path": [
+                    "__pregel_pull",
+                    "router"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "intent": "qa",
+                    "programme_ref": {
+                        "programme_id": null,
+                        "programme_name": "MSc Computer Science"
+                    },
+                    "decisions": [
+                        {
+                            "field": "entrance_requirement",
+                            "sub_query": "What are the english requirements of MSc Computer Science?",
+                            "programme_ref": {
+                                "programme_id": null,
+                                "programme_name": "MSc Computer Science"
+                            },
+                            "retrieval_type": "section"
+                        },
+                        {
+                            "field": "tuition_fee",
+                            "sub_query": "What is the tuition fee of MSc Computer Science?",
+                            "programme_ref": {
+                                "programme_id": null,
+                                "programme_name": "MSc Computer Science"
+                            },
+                            "retrieval_type": "metadata"
+                        }
+                    ]
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 1,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:29:45.489100+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d18e-fe76-6446-8001-1dae26f84b5e",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d18e-fe72-6920-8000-97b27f54741c",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d18e-fe76-6446-8001-1dae26f84b5e",
+        "parent_checkpoint_id": "1f19d18e-fe72-6920-8000-97b27f54741c"
+    },
+    {
+        "values": {
+            "messages": [
+                {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                        }
+                    ],
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "human",
+                    "name": null,
+                    "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8"
+                }
+            ]
+        },
+        "next": [
+            "input_adapter"
+        ],
+        "tasks": [
+            {
+                "id": "8fd6b6a3-38e2-7ba7-e937-14b25c24434c",
+                "name": "input_adapter",
+                "path": [
+                    "__pregel_pull",
+                    "input_adapter"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "query": "What are the english requirement and tuition fee of MSc Computer Science?"
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "loop",
+            "step": 0,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:29:45.487583+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d18e-fe72-6920-8000-97b27f54741c",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": {
+            "checkpoint_id": "1f19d18e-fe70-6425-bfff-87894dcdb459",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "interrupts": [],
+        "checkpoint_id": "1f19d18e-fe72-6920-8000-97b27f54741c",
+        "parent_checkpoint_id": "1f19d18e-fe70-6425-bfff-87894dcdb459"
+    },
+    {
+        "values": {
+            "messages": []
+        },
+        "next": [
+            "__start__"
+        ],
+        "tasks": [
+            {
+                "id": "5b7b2fea-c6aa-df3d-d7c6-2e55de52f6a8",
+                "name": "__start__",
+                "path": [
+                    "__pregel_pull",
+                    "__start__"
+                ],
+                "error": null,
+                "interrupts": [],
+                "checkpoint": null,
+                "state": null,
+                "result": {
+                    "messages": [
+                        {
+                            "id": "0c35e085-9fcb-4ddf-b1bd-76c517c4a4a8",
+                            "type": "human",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "What are the english requirement and tuition fee of MSc Computer Science?"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "metadata": {
+            "graph_id": "cityu_agent",
+            "assistant_id": "6ce14ee9-d3d3-5166-ae1d-fe7b8af1464a",
+            "user_id": "",
+            "created_by": "system",
+            "run_attempt": 1,
+            "langgraph_version": "1.2.11",
+            "langgraph_api_version": "0.12.5",
+            "langgraph_plan": "enterprise",
+            "langgraph_host": "self-hosted",
+            "langgraph_api_url": "http://127.0.0.1:2024",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "run_id": "01a02294-fcc9-7421-bfde-9f4eff784050",
+            "source": "input",
+            "step": -1,
+            "parents": {},
+            "langgraph_auth_user_id": "",
+            "langgraph_request_id": "65656618-8f08-43d9-863e-6f0e35f32207"
+        },
+        "created_at": "2026-08-21T04:29:45.486627+00:00",
+        "checkpoint": {
+            "checkpoint_id": "1f19d18e-fe70-6425-bfff-87894dcdb459",
+            "thread_id": "01a02294-fca5-78a3-8f9d-ce08eca8e644",
+            "checkpoint_ns": ""
+        },
+        "parent_checkpoint": null,
+        "interrupts": [],
+        "checkpoint_id": "1f19d18e-fe70-6425-bfff-87894dcdb459",
+        "parent_checkpoint_id": null
+    }
+]

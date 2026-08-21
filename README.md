@@ -11,7 +11,7 @@ CityU-Agent 是一个面向 CityUHK 授课型硕士（Taught Postgraduate）课�
 - 🧠 **LLM 语义路由**：`deepseek/deepseek-v4-flash`（OpenRouter，temperature=0）结构化输出路由计划，每个子问题一条决策
 - 🔀 **复合问题支持**：router 输出决策列表（最多 4 条），dispatcher 扇出多条检索路径并合并证据（按 id 去重）
 - 🗂️ **三类检索路径**：结构化精确查找（metadata）/ 详细内容向量检索（section）/ 课程推荐（summary）
-- 📚 **证据驱动回答**：所有回答基于检索到的 `Evidence` 生成，不臆造事实，答案附带 id 锚定的 Sources 引用块
+- 📚 **证据驱动回答**：所有回答基于检索到的 `Evidence` 生成，不臆造事实，回答附带结构化引用来源（citations：id / 课程 / 章节 / 置信度 / url，随 API 返回）
 - 💬 **多轮对话**：`resolved_programme_ref` 回填课程 id，后续轮次省略指代时自动复用
 - 🛡️ **多层可靠性防线**：字段确定性修复 → 盲重试 → 规则路由兜底，保证图总能拿到可用计划
 - ⚡ **懒加载优化**：BGE 嵌入权重与 Chroma 客户端缓存到首次检索时才加载，`import agent` 保持轻量
@@ -37,7 +37,7 @@ dispatcher        按 retrieval_type 扇出到对应 retriever，合并 evidence
 generator         format_evidence → LLM 生成回答（qa / summary 两套提示词）
      │
      ▼
-citation          组装结构化 citations + "Sources:" 引用块
+citation          组装结构化 citations（id / 课程 / 章节 / 置信度 / url）
      │
      ▼
 output_adapter    包装为带 citations 的 AIMessage → Final Response
@@ -147,21 +147,19 @@ server 启动后可通过 LangGraph API 以 `messages`（聊天历史）或 `que
 ## 📖 使用示例
 
 ```bash
-$ python -m agent.cli "What is the tuition fee of MSc Mechanical Engineering?"
+$ python -m agent.cli "What is the tuition fee of MSc Computer Science?"
 
 [intent] qa  |  evidence 1  |  3.2s
 
 [answer]
 
-The tuition fee for MSc Mechanical Engineering is HK$8,100 per credit
-for both local and non-local students.
+Answer:
 
-Sources:
-
-[P66-tuition_fee]
-MSc Mechanical Engineering > Tuition Fee
-Confidence: 1.0
+- Local Students: HK$7,600 per credit
+- Non-local Students: HK$9,100 per credit
 ```
+
+> CLI 只打印回答正文；结构化引用（id / 课程 / 章节 / 置信度 / url）由 `result["citations"]` 与 `AIMessage.additional_kwargs.citations` 携带，供程序化调用与聊天 UI 渲染，不再以文本块形式拼进回答。
 
 **支持的提问类型：**
 
@@ -213,8 +211,10 @@ python test/test_rag.py              # 检索结果展示
 | 文档 | 内容 |
 |---|---|
 | [docs/architecture_overview.md](docs/architecture_overview.md) | 系统架构总览、LangGraph 工作流、RAG 管线、数据模型与端到端案例 |
+| [docs/layer_overview.md](docs/layer_overview.md) | 一条 query 的完整旅程：入口 → router → 三条检索路径 → generator → citation 的分阶段实现细节 |
 | [docs/programme_schema.md](docs/programme_schema.md) | 课程页面信息 schema（A/B/C 三类内容分类） |
 | [docs/compound_query_implementation.md](docs/compound_query_implementation.md) | 复合问题实现的四个阶段工作记录 |
+| [docs/recommendation_scope_propagation.md](docs/recommendation_scope_propagation.md) | 推荐→费用复合问题的作用域传递（Plan A）工作记录 |
 | [docs/multi_turn_conversation_analysis.md](docs/multi_turn_conversation_analysis.md) | 多轮对话指代解析机制分析 |
 | [docs/git_workflow_guide.md](docs/git_workflow_guide.md) | 提交规范与分支管理手册（Contributing 必读） |
 
