@@ -5,4 +5,5 @@ vectorstore/
 .env
 .langgraph_api
 
+data/sample
 docs/
