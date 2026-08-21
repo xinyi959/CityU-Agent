@@ -151,44 +151,84 @@ def _human_message_texts(messages: list) -> list[str]:
     return texts
 
 
+def resolve_programme_scope(
+    query: str,
+    programme_ref: dict | None = None,
+    messages: list | None = None,
+    scope_ids: list | None = None,
+) -> list[dict]:
+    """Resolve the programme(s) a query refers to, as a LIST (retrieval scope).
+
+    Candidates are tried in priority order:
+
+    1. explicit programme in the CURRENT query text (P-code / name) --
+       strongest: the user named a programme THIS turn (topic switch).
+    2. ``scope_ids`` -- the recommendation set resolved this turn, or the
+       set persisted by the PREVIOUS turn (dispatcher passes both as
+       ``programme_ids``). Beats the router's inferred single ref so
+       "Any apply requirement I should fulfill?" after a recommendation
+       stays scoped to the whole recommended set rather than the one
+       programme the router happens to re-emit.
+    3. router ``programme_ref`` (single, inferred from history when the
+       query omits a referent).
+    4. text rules over recent human messages (most recent first).
+
+    Returns [] when nothing resolves -- the caller falls back to a
+    whole-corpus semantic search.
+    """
+    # 1. explicit this-turn mention
+    if query:
+        programme = find_programme(extract_programme_ref(query))
+        if programme:
+            return [programme]
+
+    # 2. scope set (this turn's recommendation or the previous turn's set)
+    programmes = []
+    for pid in scope_ids or []:
+        programme = find_programme(
+            {"programme_id": pid, "programme_name": None}
+        )
+        if programme and programme not in programmes:
+            programmes.append(programme)
+    if programmes:
+        return programmes
+
+    # 3. router ref (inferred single)
+    if programme_ref and (
+        programme_ref.get("programme_id") or programme_ref.get("programme_name")
+    ):
+        programme = find_programme(programme_ref)
+        if programme:
+            return [programme]
+
+    # 4. recent human messages
+    if messages:
+        for text in _human_message_texts(messages):
+            programme = find_programme(extract_programme_ref(text))
+            if programme:
+                return [programme]
+
+    return []
+
+
 def resolve_programme_ref(
     query: str,
     programme_ref: dict | None = None,
-    resolved_ref: dict | None = None,
     messages: list | None = None,
+    scope_ids: list | None = None,
 ) -> dict | None:
-    """Resolve a programme reference to a full Programme dict (or None).
+    """Single-programme convenience wrapper over :func:`resolve_programme_scope`.
 
-    Candidates are tried in priority order; the first one that
-    ``find_programme`` can resolve wins:
-
-    1. this turn's router ``programme_ref`` (strongest signal)
-    2. previously confirmed ``resolved_ref`` (reuse the id, skip re-inference)
-    3. text rules on the current ``query`` (P-code / programme name)
-    4. text rules over recent human messages (most recent first) --
-       rescues omitted referents such as "what about English requirement?"
-
-    Used by both the metadata and section retrievers so the fallback chain
-    stays symmetric.
+    Returns the programme only when the scope resolves to exactly ONE; a
+    multi-programme scope is not a single referent, so it returns None.
     """
-    candidates = [programme_ref, resolved_ref]
-    if query:
-        candidates.append(extract_programme_ref(query))
-    if messages:
-        candidates.extend(
-            extract_programme_ref(text)
-            for text in _human_message_texts(messages)
-        )
-
-    for ref in candidates:
-        if not ref:
-            continue
-        if not ref.get("programme_id") and not ref.get("programme_name"):
-            continue
-        programme = find_programme(ref)
-        if programme:
-            return programme
-    return None
+    programmes = resolve_programme_scope(
+        query,
+        programme_ref=programme_ref,
+        messages=messages,
+        scope_ids=scope_ids,
+    )
+    return programmes[0] if len(programmes) == 1 else None
 
 
 def extract_field(query: str) -> str | None:

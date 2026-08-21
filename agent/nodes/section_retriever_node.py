@@ -1,35 +1,28 @@
 from rag.evidence import Evidence
 from rag.retriever import retrieve_section
-from rag.programme_resolver import resolve_programme_ref
+from rag.programme_resolver import resolve_programme_scope
 
 
 def section_retriever_node(state):
 
     query = state["query"]
 
-    # Resolve the programme with the same fallback chain as the metadata
-    # retriever: router ref -> previously confirmed ref -> text rules on the
-    # current query -> text rules on recent human messages. Keeps an omitted
-    # referent ("what about English requirement?") from degrading the search
-    # to the whole section corpus.
-    programme = resolve_programme_ref(
+    # Resolve the programme(s) to scope to: explicit query mention -> scope
+    # set (this turn's recommendation / previous turn's persisted set) ->
+    # router inferred ref -> message history.
+    programmes = resolve_programme_scope(
         query,
         programme_ref=state.get("programme_ref"),
-        resolved_ref=state.get("resolved_programme_ref"),
         messages=state.get("messages", []),
+        scope_ids=state.get("programme_ids") or [],
     )
 
-    programme_id = programme["programme_id"] if programme else None
+    ids = [p["programme_id"] for p in programmes]
 
-    # Recommendation-scoped path: no single programme resolved but an earlier
-    # summary decision in the same turn produced a set of programme ids ->
-    # filter the section search to them.
-    scope_ids = state.get("programme_ids") or []
-
-    if programme_id:
-        docs = retrieve_section(query, programme_id=programme_id, k=5)
-    elif scope_ids:
-        docs = retrieve_section(query, programme_ids=scope_ids, k=5)
+    if len(ids) == 1:
+        docs = retrieve_section(query, programme_id=ids[0], k=5)
+    elif len(ids) > 1:
+        docs = retrieve_section(query, programme_ids=ids, k=5)
     else:
         docs = retrieve_section(query, k=5)
 
@@ -48,9 +41,13 @@ def section_retriever_node(state):
     out = {
         "evidence": evidence,
     }
-    if programme:
-        out["resolved_programme_ref"] = {
-            "programme_id": programme["programme_id"],
-            "programme_name": programme.get("name"),
-        }
+    if programmes:
+        # Persist the scope so the next omitted referent keeps the same set.
+        out["resolved_programme_refs"] = [
+            {
+                "programme_id": p["programme_id"],
+                "programme_name": p.get("name"),
+            }
+            for p in programmes
+        ]
     return out

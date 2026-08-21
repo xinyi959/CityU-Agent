@@ -64,7 +64,9 @@ class AgentState(InputState, OutputState, total=False):
     # Router extracted reference
     programme_ref: ProgrammeRefState
 
-    # Confirmed programme reference. Retrievers write this back after
-    # find_programme succeeds (with programme_id filled); later turns reuse it
-    # so an omitted referent does not force a repeat of name -> id inference.
-    resolved_programme_ref: ProgrammeRefState
+    # Confirmed programme reference SET. Retrievers write this back after
+    # resolving (single programme -> list of 1; a recommendation -> the whole
+    # recommended set). Later turns reuse it so an omitted referent ("Any
+    # apply requirement I should fulfill?") scopes to the programmes in
+    # context instead of degrading to a whole-corpus search.
+    resolved_programme_refs: list[ProgrammeRefState]

@@ -14,8 +14,7 @@ from rag.evidence import Evidence
 from rag.metadata_builder import FIELD_LABELS, build_metadata_document, value_to_text
 from rag.programme_resolver import (
     extract_field,
-    find_programme,
-    resolve_programme_ref,
+    resolve_programme_scope,
 )
 from rag.retriever import retrieve_metadata
 
@@ -83,39 +82,30 @@ def metadata_retriever_node(state):
         or extract_field(query)
     )
 
-    # Shared fallback chain (router ref -> previously confirmed ref -> text
-    # rules on query -> text rules on recent human messages).
-    programme = resolve_programme_ref(
+    # Resolve the programme(s) to scope this sub-question to: explicit query
+    # mention -> scope set (this turn's recommendation / previous turn's
+    # persisted set) -> router inferred ref -> message history.
+    programmes = resolve_programme_scope(
         query,
         programme_ref=state.get("programme_ref"),
-        resolved_ref=state.get("resolved_programme_ref"),
         messages=state.get("messages", []),
+        scope_ids=state.get("programme_ids") or [],
     )
 
-    if programme is not None:
+    if programmes:
         return {
-            "evidence": [_evidence_for_programme(programme, field)],
-            "resolved_programme_ref": {
-                "programme_id": programme["programme_id"],
-                "programme_name": programme.get("name"),
-            },
+            "evidence": [
+                _evidence_for_programme(programme, field)
+                for programme in programmes
+            ],
+            "resolved_programme_refs": [
+                {
+                    "programme_id": programme["programme_id"],
+                    "programme_name": programme.get("name"),
+                }
+                for programme in programmes
+            ],
         }
-
-    # Recommendation-scoped path: the sub-question has no programme referent
-    # of its own ("how much should I pay?") but an earlier summary decision in
-    # the same turn resolved a set of programmes -- exact lookup each one.
-    scope_ids = state.get("programme_ids") or []
-    if scope_ids:
-        evidence = []
-        for pid in scope_ids:
-            programme = find_programme(
-                {"programme_id": pid, "programme_name": None}
-            )
-            if programme is not None:
-                evidence.append(_evidence_for_programme(programme, field))
-        if evidence:
-            # No singular resolved_programme_ref: the referent is a set.
-            return {"evidence": evidence}
 
     # fallback: no resolvable programme -> semantic search on metadata index
     evidence = [

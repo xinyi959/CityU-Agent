@@ -15,14 +15,19 @@ Per-decision sub-state:
 - ``field``        <- dec.field
 - ``programme_ref``<- dec.programme_ref if set (cross-programme compound),
                        else the top-level programme_ref shared by the turn
-- ``programme_ids``<- (Plan A) the programme ids a preceding summary
-                       decision resolved to, when THIS decision has no
-                       programme referent of its own. Scopes the metadata /
-                       section retrieval to the recommended set instead of a
+- ``programme_ids``<- the programme ids a preceding summary decision
+                       resolved to THIS turn, or the set persisted by the
+                       PREVIOUS turn. Scopes a referent-less metadata /
+                       section sub-question to that set instead of a
                        whole-corpus semantic search ("which programme should
-                       I apply for? and how much should I pay?").
-- messages / resolved_programme_ref flow through unchanged so the
-  multi-turn referent fallback chain keeps working.
+                       I apply for? and how much should I pay?" / "Any apply
+                       requirement I should fulfill?").
+- ``resolved_programme_refs`` <- persisted programme set for the NEXT turn
+                       (the recommendation set if one happened this turn,
+                       else the resolved single/multi refs). List of
+                       {programme_id, programme_name}.
+- messages flow through unchanged so the multi-turn referent fallback
+  chain keeps working.
 
 Dependency ordering: decisions are processed in order, and only a summary
 that appears BEFORE a referent-less metadata/section decision can seed its
@@ -41,6 +46,7 @@ from agent.nodes.router_node import _fallback_decision_list
 from agent.nodes.section_retriever_node import section_retriever_node
 from agent.nodes.summary_retriever_node import summary_retriever_node
 from agent.state.router_schema import retrieval_type_of
+from rag.programme_resolver import get_programmes
 
 RETRIEVER_NODES = {
     "metadata": metadata_retriever_node,
@@ -58,14 +64,23 @@ def dispatcher_node(state):
 
     evidence = []
     seen_ids = set()
-    resolved_ref = state.get("resolved_programme_ref")
 
-    # Programme ids collected from summary (recommendation) decisions earlier
-    # in this turn. A later metadata/section sub-question with no programme
-    # referent of its own ("which programme should I apply for? and how much
-    # should I pay?") is scoped to this set instead of falling back to a
-    # whole-corpus semantic search.
+    # Programme set persisted by the previous turn, reused as scope when this
+    # turn's sub-question omits a referent ("Any apply requirement I should
+    # fulfill?").
+    persisted_ids = [
+        ref.get("programme_id")
+        for ref in (state.get("resolved_programme_refs") or [])
+        if ref and ref.get("programme_id")
+    ]
+
+    # Programme ids collected from summary (recommendation) decisions this
+    # turn, scoped to later referent-less metadata/section decisions.
     scope_ids = []
+
+    # Programme ids resolved by the retrievers this turn (single refs or the
+    # scoped set), persisted when no recommendation happened.
+    resolved_ids = []
 
     for dec in decisions:
         rtype = dec.get("retrieval_type") or retrieval_type_of(dec.get("field"))
@@ -83,16 +98,13 @@ def dispatcher_node(state):
             "programme_ref": dec_ref or top_ref,
         }
 
-        # Scope propagation (Plan A): hand the recommended set to the
-        # retriever. The retrievers already resolve an explicit single
-        # programme first (router ref -> resolved ref -> query text ->
-        # messages); only when that fails do they fall back to this set. So
-        # no need to re-derive "has an explicit referent" here -- a ref that
-        # does not resolve to a real programme (e.g. the top-level ref
-        # {"programme_name": "AI"} for a recommendation) correctly lets the
-        # scope take over.
-        if rtype in ("metadata", "section") and scope_ids:
-            sub_state["programme_ids"] = list(scope_ids)
+        # Scope: this turn's recommendation set wins; otherwise the set
+        # persisted by the previous turn. The retrievers resolve an explicit
+        # single programme first (router ref -> resolved refs -> query text ->
+        # messages); only when that fails do they fall back to this set.
+        scope = list(scope_ids) or persisted_ids
+        if rtype in ("metadata", "section") and scope:
+            sub_state["programme_ids"] = scope
 
         out = retriever(sub_state)
 
@@ -102,16 +114,34 @@ def dispatcher_node(state):
                 if e.programme_id and e.programme_id not in scope_ids:
                     scope_ids.append(e.programme_id)
 
+        for ref in out.get("resolved_programme_refs") or []:
+            pid = (ref or {}).get("programme_id")
+            if pid and pid not in resolved_ids:
+                resolved_ids.append(pid)
+
         for e in out.get("evidence", []):
             if e.id in seen_ids:
                 continue
             seen_ids.add(e.id)
             evidence.append(e)
 
-        if not resolved_ref and out.get("resolved_programme_ref"):
-            resolved_ref = out["resolved_programme_ref"]
+    # Persist the programme set for the NEXT turn. The recommendation set
+    # wins (most recent subject); otherwise the resolved single/multi refs
+    # from the retrievers; otherwise keep the previous value (omit the key).
+    if scope_ids:
+        ids = list(scope_ids)
+    elif resolved_ids:
+        ids = resolved_ids
+    else:
+        ids = None
 
-    return {
-        "evidence": evidence,
-        "resolved_programme_ref": resolved_ref,
-    }
+    result = {"evidence": evidence}
+    if ids is not None:
+        name_map = {
+            p["programme_id"]: p.get("name") for p in get_programmes()
+        }
+        result["resolved_programme_refs"] = [
+            {"programme_id": pid, "programme_name": name_map.get(pid)}
+            for pid in ids
+        ]
+    return result
